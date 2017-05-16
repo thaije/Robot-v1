@@ -6,19 +6,20 @@
 #	   Yellow = control (pin 5)
 #	   Red = ext 6v power
 import RPi.GPIO as GPIO
+import time
 
 def setup():
-	GPIO.setmode(GPIO.BOARD)
+	GPIO.setmode(GPIO.BCM)
 	GPIO.setup(3, GPIO.OUT)
 
 def main():
 	p = GPIO.PWM(3, 50)
 	p.start(50)
-	p.ChangeDutyCycle(90)
-	p.ChangeDutyCycle(100)
+	p.ChangeDutyCycle(60)
+	p.ChangeDutyCycle(95)
+	time.sleep(3)
 	p.stop()
 	print "test"
-	return
 
 def cleanup():
 	GPIO.cleanup()
