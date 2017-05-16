@@ -12,3 +12,10 @@
 
 
 # Wiring for 2 DC motors
+
+
+
+# Needed parts:
+- PWM adafruit shield
+- ultrasonic sensor
+- power connect cable
