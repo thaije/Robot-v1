@@ -12,7 +12,7 @@ def setup():
 	GPIO.setup(3, GPIO.OUT)
 
 def main():
-	p = GPIO.PWM(25, 50)
+	p = GPIO.PWM(3, 50)
 	p.start(50)
 	p.ChangeDutyCycle(90)
 	p.ChangeDutyCycle(100)
