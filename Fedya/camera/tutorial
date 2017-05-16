@@ -1,0 +1,20 @@
+http://zacharybears.com/low-latency-raspberry-pi-video-streaming/
+
+how to:
+
+run on pc: 
+nc.traditional -l -p 5000 | mplayer -fps 60 -cache 1024 -
+
+run on rpi: 
+raspivid -t 0 -b 20000 -o - | nc.traditional 192.168.0.4 5000
+
+
+Method 2:
+
+run on pc:
+nc.traditional -l -p 5000 | mplayer -fps 24 -cache 512 -
+
+Run on rpi:
+raspivid -t 999999 --hflip -o - -w 512 -h 512 -fps 15 | nc.traditional 192.168.0.4 5000
+
+Works also with fps 60 / 45 and resolution 1280 / 720
