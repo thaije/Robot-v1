@@ -1,5 +1,9 @@
 # This script uses software pwd on a sne73 chip to
-# drive two dc motors (driving the tracks)
+# drive two dc motors 
+# Speed of the DC motors is based on average voltage
+# Low duty cycle is short pulses with short pauses inbetween (low average voltage)
+# High duty cycle is long pulses with long pauses inbetween (high average voltage)
+# Max duty cycle is 100
 
 import RPi.GPIO as GPIO
 from time import sleep
@@ -43,9 +47,6 @@ class Motor:
         self.pwm_forward.ChangeDutyCycle(0)
         self.pwm_backward.ChangeDutyCycle(0)
 
-# initiliase motors, motor1=left, motor2=right
-motor1 = Motor(16, 22, 18)
-motor2 = Motor(23, 19, 21)
 
 # Drives the tracks 
 # Input is driveTracks(LeftTrack, rightTrack), 
@@ -114,22 +115,19 @@ def cleanup():
 	stop()
 	GPIO.cleanup()	
 
-# Motor 2 test
-#motor1.forward(60)
-#motor2.forward(60)
-#sleep(5)
 
-# Running both
-#motor1.forward(99)
-#motor2.forward(99)
-#sleep(5)
-#motor1.backward(99)
-#motor2.backward(99)
-#sleep(5)
+# initiliase motors
+# motor1 = sne73 right side
+# motor2 = sne73 left side
+motor1 = Motor(16, 22, 18)
+motor2 = Motor(23, 19, 21)
 
-# let's see what happens
-#motor1.forward(90)
-#motor2.forward(90)
-#sleep(5)
+# test
+motor1.forward(100)
+sleep(5)
+#motor1.backward(40)
+#sleep(2)
+motor1.stop()
 
-#cleanup()
+
+cleanup()
