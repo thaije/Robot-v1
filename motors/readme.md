@@ -64,5 +64,9 @@ Motor(23, 19, 21) (Board pins)
 
 # Extra needed parts:
 - PWM adafruit shield
-- ultrasonic sensor
+- ultrasonic sensor (3?)
 - power connect cable
+- stronger motor shield (sne73 can handle max 650ma, stall for motors is 2600ma)
+- dc motors with encoder
+- motor clamps 
+- usb microphone

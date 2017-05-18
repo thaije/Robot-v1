@@ -35,7 +35,8 @@ class Motor:
         self.pwm_forward.ChangeDutyCycle(speed)    
 
     def backward(self, speed):
-        """ pinBackward is the forward Pin, so we change its duty
+        """ pinBackward is the forward Pin, so wwiringpi.pwmWrite(18,0)
+			wiringpi.pwmWrite(13,0)e change its duty
              cycle according to speed. """
 
         self.pwm_forward.ChangeDutyCycle(0)
@@ -48,32 +49,22 @@ class Motor:
         self.pwm_backward.ChangeDutyCycle(0)
 
 
-# Drives the tracks 
-# Input is driveTracks(LeftTrack, rightTrack), 
-# with both values [-99,99], minus backward, plus forward
-def driveTracks(leftTr,rightTr):
-	# limit input to 99 
-	leftTr = clamp(leftTr, -99, 99)
-	rightTr = clamp(rightTr, -99, 99)
 
-	print "LeftTr:", leftTr, ". RightTr:", rightTr
-
-	if(leftTr > 0):
-		motor1.forward(leftTr)
-	elif(leftTr < 0):
-		motor1.backward(leftTr*-1)
-	else:
-		motor1.stop()
-
-	if(rightTr > 0):
-		motor2.forward(rightTr)
-	elif(rightTr < 0):	
-		motor2.backward(rightTr*-1)
-	else:
-		motor2.stop()
+# initiliase motors
+# motor1 = sne73 right side
+# motor2 = sne73 left side
+motor1 = Motor(16, 22, 18)
+print "DC motor 1 online"
+motor2 = Motor(23, 19, 21)
+print "DC motor 2 online"
 
 
-# drive both tracks forward/backward
+
+#######################################
+# Methods to move the wheels
+#######################################
+
+# Move in a direction forward/backward
 # s = speed [-99, 99], minus = backward
 def move(s):
 	s = clamp(s,-99,99)
@@ -90,8 +81,8 @@ def stop():
 	motor2.stop()
 	
 
-# turn the tracks
-# r =direction, r>0=leftturn, r<0=rightturn
+# turn the robot
+# r = direction, r > 0=leftturn, r < 0=rightturn
 # s = speed [1,99]
 def turn(r,s):
 	s = clamp(s,0,99)
@@ -107,7 +98,6 @@ def turn(r,s):
 
 
 
-
 def clamp(n, minN, maxN):
 	return max(min(maxN, n), minN)
 	
@@ -116,18 +106,14 @@ def cleanup():
 	GPIO.cleanup()	
 
 
-# initiliase motors
-# motor1 = sne73 right side
-# motor2 = sne73 left side
-motor1 = Motor(16, 22, 18)
-motor2 = Motor(23, 19, 21)
+
 
 # test
-motor1.forward(100)
-sleep(5)
+#motor1.forward(100)
+#sleep(5)
 #motor1.backward(40)
 #sleep(2)
-motor1.stop()
+#motor1.stop()
 
 
-cleanup()
+#cleanup()
