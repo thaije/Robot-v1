@@ -50,16 +50,6 @@ class Motor:
 
 
 
-# initiliase motors
-# motor1 = sne73 right side
-# motor2 = sne73 left side
-motor1 = Motor(16, 22, 18)
-print "DC motor 1 online"
-motor2 = Motor(23, 19, 21)
-print "DC motor 2 online"
-
-
-
 #######################################
 # Methods to move the wheels
 #######################################
@@ -88,32 +78,41 @@ def turn(r,s):
 	s = clamp(s,0,99)
 		
 	# turn left
-	if r>0:
+	if r > 0:
 		motor1.backward(s)
 		motor2.forward(s)
-	elif r<0:
+	elif r < 0:
 		motor1.forward(s)
 		motor2.backward(s)
 		
-
-
-
+# Limit a value to a min and max
 def clamp(n, minN, maxN):
 	return max(min(maxN, n), minN)
-	
+
+
 def cleanup():
 	stop()
 	GPIO.cleanup()	
 
 
+# Test the motors
+def test():
+	motor1.forward(100)
+	sleep(5)
+	motor1.backward(40)
+	sleep(2)
+	motor1.stop()
+	cleanup()
 
 
-# test
-#motor1.forward(100)
-#sleep(5)
-#motor1.backward(40)
-#sleep(2)
-#motor1.stop()
+
+# initiliase motors
+# motor1 = sne73 right side
+# motor2 = sne73 left side
+motor1 = Motor(16, 22, 18)
+print "DC motor 1 online"
+motor2 = Motor(23, 19, 21)
+print "DC motor 2 online"
 
 
-#cleanup()
+#test()

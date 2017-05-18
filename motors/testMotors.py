@@ -1,19 +1,19 @@
 from time import sleep
 
 print "Firing up engines"
-import sne73SoftwarePwm as dcMotorsControl
+import sne73SoftwarePwm as dcMotorControl
 import servoWirPWM as servoControl
 
 
 try:
 
-	dcMotorsControl.turn(1,55)
+	dcMotorControl.turn(1,55)
 	sleep(4)
-	dcMotorsControl.stop()
+	dcMotorControl.stop()
 	sleep(1)
-	dcMotorsControl.move(99)
+	dcMotorControl.move(99)
 	sleep(2)
-	dcMotorsControl.move(-99)
+	dcMotorControl.move(-99)
 	sleep(2)
 
 except KeyboardInterrupt:
@@ -25,4 +25,5 @@ except:
 
 finally:
 	print "Cleaning up.."
-	dcMotorsControl.cleanup()
+	dcMotorControl.cleanup()
+	servoControl.cleanup()
