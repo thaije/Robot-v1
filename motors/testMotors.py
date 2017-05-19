@@ -1,29 +1,33 @@
 from time import sleep
+import sys
 
-print "Firing up engines"
+print "Initializing motors"
 import sne73SoftwarePwm as dcMotorControl
-import servoWirPWM as servoControl
+from servoWirPWM import *
 
 
 try:
 
-	dcMotorControl.turn(1,55)
-	sleep(4)
-	dcMotorControl.stop()
-	sleep(1)
-	dcMotorControl.move(99)
-	sleep(2)
-	dcMotorControl.move(-99)
-	sleep(2)
+    #dcMotorControl.turn(1, 55)
+    #sleep(4)
+    #dcMotorControl.stop()
+    #sleep(1)
+    #dcMotorControl.move(99)
+    #sleep(2)
+    #dcMotorControl.move(-99)
+    #sleep(2)
+    verticalServo.setPosition(100)
+    sleep(2)
+    print "test"
 
 except KeyboardInterrupt:
-        print "User cancelled"
+    print "User cancelled"
 
 except:
-        print "Unexpected error:", sys.exc_info()[0]
-	raise
+    print "Unexpected error:", sys.exc_info()[0]
+    raise
 
 finally:
-	print "Cleaning up.."
-	dcMotorControl.cleanup()
-	servoControl.cleanup()
+    print "Cleaning up.."
+    dcMotorControl.cleanup()
+    servoCleanup()
