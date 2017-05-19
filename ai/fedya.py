@@ -4,28 +4,21 @@
 # converts it to a mp3 with an tts vocalizer. Then play the mp3.
 
 import subprocess
-from tts import vlc
-import os.path
-import time
-from mutagen.mp3 import MP3
+from pygame import mixer
 
 # input txt file and write text to it
 file = open("tss-input.txt", "w")
-file.write("Hello Tsjalling, I am Fedya! How are you doing? You cyka")
+file.write("Hello Sophie, I am Fedya! How are you doing? You good looking tiger. Rawr")
 file.close()
 
 # call the tts jar file and convert to mp3
 subprocess.call(['java', '-jar', 'tts/tts.jar'])
 
-# Play the mp3 file and sleep for length of file
-length = MP3("speech.mp3").info.length
-path = os.path.abspath(os.path.join("speech.mp3", os.pardir))
-path =  path.replace(" ", "")
-p = vlc.MediaPlayer("file://" + path + "/speech.mp3")
 
-# play track and set volume
-p.play()
-time.sleep(0.01)
-p.audio_set_volume(125)
-time.sleep(length)
+# Play the mp3 file and sleep for length of file
+mixer.init()
+mixer.music.load('speech.mp3')
+mixer.music.set_volume(0.2)
+mixer.music.play()
+
 
