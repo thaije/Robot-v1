@@ -5,10 +5,10 @@
 
 # Usage
 #### get voices:
-- espeak --voices=en
+```espeak --voices=en```
 
 #### example
-- espeak -v en-polish "text"
+```espeak -v en-polish "text"```
 
 #### set voice speed: 
-- espeak -s 175
+```espeak -s 175```
