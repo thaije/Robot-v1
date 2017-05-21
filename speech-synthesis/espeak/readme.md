@@ -4,10 +4,11 @@
 - http://espeak.sourceforge.net/commands.html
 
 # Usage
-- get voices:
+#### get voices:
 - espeak --voices=en
 
+#### example
 - espeak -v en-polish "text"
 
-- set voice speed: 
+#### set voice speed: 
 - espeak -s 175
