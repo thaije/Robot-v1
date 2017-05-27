@@ -11,7 +11,7 @@ Raspberry pi robot
 - Extend robot frame for DC motors, balanced
 - Mount wheels, DC motors, batteries
 - Test new DC motors
-- Offline speech synthesis (gnuspeech)
+- Offline speech synthesis (espeak / mimic)
 - Offline speech recognition (cmu sphinx)
 - Connect / test MPU
 - Connect pi camera to opencv / simplecv

@@ -1,5 +1,5 @@
 import subprocess
-text = '"Hello how are you doing"'
+text = '"Sophie. You are not being nice"'
 subprocess.call('espeak '+text, shell=True)
 
 

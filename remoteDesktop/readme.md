@@ -1,0 +1,14 @@
+#how to connect
+- Activate ssh for RPI in config
+- Set password and remember it
+- Get IP of RPI (using modem or something)
+- connect to RPI using SSH: ssh pi@ip_of_RPI
+- Install vnc server on RPI: sudo apt-get install tightvncserver
+- Start vnc server: vncserver
+- Note the number: New 'X' desktop is raspberrypi:>>>2<<< 
+- Set the password: vncpasswd
+- Install Vinagre on your linux laptop
+- Open Vinagre and connect to the RPI:
+- Select VNC protocol, rpi ip under host
+- Enter password when asked
+- When done, kill vnc server on rpi with: vncserver -kill :>>vnc server number from before<<

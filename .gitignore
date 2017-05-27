@@ -1,3 +1,5 @@
 opencv/data/*
 lsd_slam/room/*
 speech-synthesis/mimic/mimic-development/*
+speech-recognition/sphinx/sphinxbase-5prealpha/*
+/speech-recognition/sphinx/pocketsphinx-5prealpha/*
