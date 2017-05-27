@@ -10,6 +10,7 @@ from time import sleep
 
 GPIO.setmode(GPIO.BOARD)
 
+
 class Motor:
 
     def __init__(self, pinForward, pinBackward, pinControl):
@@ -98,17 +99,17 @@ def cleanup():
 
 # Test the motors
 def test():
- 	try:
-           	motor1.forward(100)
-		sleep(5)
-    		motor1.backward(120)
-   		sleep(5)
-    		motor1.stop()
-    		cleanup()
-        except:
-            cleanup()
-            print "Exiting."
-           
+    try:
+        motor1.forward(100)
+        sleep(5)
+        motor1.backward(120)
+        sleep(5)
+        motor1.stop()
+        cleanup()
+    except:
+        cleanup()
+        print "Exiting."
+
 
 
 
@@ -122,17 +123,25 @@ print "DC motor 2 online"
 
 
 #test()
-#motor2.forward(100)
+#motor2.forward(90)
 #sleep(2)
 #motor2.backward(100)
 #sleep(2)
 #motor2.stop()
 
-#motor1.forward(100)
+#motor1.forward(90)
 #sleep(2)
 #motor1.backward(100)
 #sleep(2)
 #motor1.stop()
 
+#move(99)
+#sleep(2)
+#stop()
 
+#move(100)
+#sleep(0.5)
+#print "slower"
+#move(60)
+#sleep(2)
 #cleanup()

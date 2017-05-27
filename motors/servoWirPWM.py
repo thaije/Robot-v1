@@ -49,10 +49,10 @@ class Servo:
         wiringpi.pwmWrite(self.pin, self.position)
 
     def center(self):
-	self.setPosition(self.centerPosition)
+        self.setPosition(self.centerPosition)
 
     def stop(self):
-	wiringpi.pwmWrite(self.pin, 0)
+        wiringpi.pwmWrite(self.pin, 0)
 
 #######################################
 # General methods / methods to move the servos
@@ -132,19 +132,19 @@ def test2():
     dtMin, dtMax = 60, 120
     dt = 72
     while True:
-            try:
-                print dt
-                wiringpi.pwmWrite(18, dt)
-                wiringpi.pwmWrite(13, dt)
-                dt += 10
-                if dt > dtMax:
-                    dt = dtMin
+        try:
+            print dt
+            wiringpi.pwmWrite(18, dt)
+            wiringpi.pwmWrite(13, dt)
+            dt += 10
+            if dt > dtMax:
+                dt = dtMin
                 time.sleep(1)
-            except:
-                wiringpi.pwmWrite(18, 0)
-                wiringpi.pwmWrite(13, 0)
-                print "Exiting."
-                break
+        except:
+            wiringpi.pwmWrite(18, 0)
+            wiringpi.pwmWrite(13, 0)
+            print "Exiting."
+            break
 
 
 #test2()

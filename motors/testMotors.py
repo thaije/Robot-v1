@@ -12,13 +12,17 @@ try:
     #sleep(4)
     #dcMotorControl.stop()
     #sleep(1)
-    dcMotorControl.move(99)
+    #dcMotorControl.move(99)
+    dcMotorControl.motor1.forward(99)
     sleep(2)
+
+
+
     #dcMotorControl.stop()
     #dcMotorControl.move(-99)
     #sleep(2)
-    verticalServo.setPosition(100)
-    sleep(2)
+    #verticalServo.setPosition(100)
+    #sleep(2)
     print "test"
 
 except KeyboardInterrupt:
