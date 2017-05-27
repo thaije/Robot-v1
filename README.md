@@ -1,5 +1,5 @@
 # Robot
-Raspberry pi robot 
+Raspberry pi robot
 
 # Dependencies
 - RPIO
@@ -8,10 +8,8 @@ Raspberry pi robot
 
 #Todo
 ## Todo
-- Extend robot frame for DC motors, balanced
-- Mount wheels, DC motors, batteries
-- Test new DC motors
-- Offline speech synthesis (espeak / mimic)
+- Align motors (ticks per revolution)
+- Offline speech synthesis (gnuspeech)
 - Offline speech recognition (cmu sphinx)
 - Connect / test MPU
 - Connect pi camera to opencv / simplecv
@@ -23,9 +21,14 @@ Raspberry pi robot
 - Add manual control option with Xbox controller
 - Online/API speech synthesis (wave net)
 - Online/API speech recognition (wave net)
-- Monocular slam 
+- Monocular slam
 
 ## Done
+- setup remote access
+- Tested enoders
+- Test new DC motors
+- Extend robot frame for DC motors, balanced
+- Mount wheels, DC motors, batteries
 - Connected servo's
 - Tested servo's
 - Connected DC motors

@@ -12,8 +12,8 @@ try:
     #sleep(4)
     #dcMotorControl.stop()
     #sleep(1)
-    #dcMotorControl.move(99)
-    dcMotorControl.motor1.forward(99)
+    dcMotorControl.move(100)
+    # dcMotorControl.motor1.forward(99)
     sleep(2)
 
 
