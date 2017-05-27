@@ -48,8 +48,11 @@ class Servo:
         self.position = position
         wiringpi.pwmWrite(self.pin, self.position)
 
+    def center(self):
+	self.setPosition(self.centerPosition)
+
     def stop(self):
-        self.setPosition(self.centerPosition)
+	wiringpi.pwmWrite(self.pin, 0)
 
 #######################################
 # General methods / methods to move the servos
@@ -63,6 +66,12 @@ def clamp(n, minN, maxN):
 
 # stop servos
 def servoCleanup():
+    verticalServo.center()
+    horizontalServo.center()
+
+    # wait for the servo to center
+    time.sleep(1)
+
     verticalServo.stop()
     horizontalServo.stop()
 
@@ -101,7 +110,7 @@ print "Servo 2 online"
 
 # run a test
 #test()
-
+#servoCleanup()
 
 def test2():
     print "Starting PWM"
@@ -137,3 +146,5 @@ def test2():
                 print "Exiting."
                 break
 
+
+#test2()

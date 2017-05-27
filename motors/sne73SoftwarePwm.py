@@ -98,12 +98,17 @@ def cleanup():
 
 # Test the motors
 def test():
-    motor1.forward(100)
-    sleep(5)
-    motor1.backward(40)
-    sleep(2)
-    motor1.stop()
-    cleanup()
+ 	try:
+           	motor1.forward(100)
+		sleep(5)
+    		motor1.backward(120)
+   		sleep(5)
+    		motor1.stop()
+    		cleanup()
+        except:
+            cleanup()
+            print "Exiting."
+           
 
 
 
@@ -117,3 +122,17 @@ print "DC motor 2 online"
 
 
 #test()
+#motor2.forward(100)
+#sleep(2)
+#motor2.backward(100)
+#sleep(2)
+#motor2.stop()
+
+#motor1.forward(100)
+#sleep(2)
+#motor1.backward(100)
+#sleep(2)
+#motor1.stop()
+
+
+#cleanup()

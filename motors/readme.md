@@ -13,12 +13,12 @@ File: servoWirPWM.py
 ### Wiring
 
 #### Servo 1:
-- Black: Ground rpi
+- Black: Ground pinout board
 - Red: 6v on pinout board
 - Yellow: BCM pin 18
 
 #### Servo 2:
-- Black: Ground rpi
+- Black: Ground pinout board
 - Red: 6v on pinout board
 - Yellow: BCM pin 13
 
@@ -29,9 +29,10 @@ File: servoWirPWM.py
 
 ### Parts
 - sne73 chip
-- external 6v battery
+- external 6v battery (shared with servos)
 - pinout board
 - 2 dc motors
+- 2 Hall sensor encoders for the dc motors
 
 ### Wiring
 - See photos in folder for wiring
@@ -52,6 +53,15 @@ File: servoWirPWM.py
 - DC motor 2 green to sne73 left 3
 - DC motor 2 yellow to sne73 left 6
 
+#### Encoder wiring
+- 3v3 pin (pin 1) to pinout board (not same side as 6v)
+- ground from rpi to pinout board
+- 3v3 input pins from encoders to pinout board +
+- ground pins from encoders to pinout board ground
+- Right motor encoder output 1 (yellow) to BCM 17 / pin 11
+- Right motor encoder output 2 (green) to BCM 27 / pin 13
+- Left motor encoder ouput 1 (yellow) to BCM 5 / pin 29
+- Left motor encoder ouput 2 (green) to BCM 6 / pin 31
 
 #### DC motor 1:
 pinForward, pinBackward, pinControl):
