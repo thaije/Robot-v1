@@ -9,6 +9,6 @@
 - Set the password: vncpasswd
 - Install Vinagre on your linux laptop
 - Open Vinagre and connect to the RPI:
-- Select VNC protocol, rpi ip under host
+- Select VNC protocol, rpi ip:vnc_server_number under host
 - Enter password when asked
 - When done, kill vnc server on rpi with: vncserver -kill :>>vnc server number from before<<
