@@ -9,13 +9,14 @@ Raspberry pi robot
 #Todo
 ## Todo
 - Align motors (ticks per revolution)
-- Offline speech synthesis (gnuspeech)
-- Offline speech recognition (cmu sphinx)
+- Make calibration method for motors
+- write readme for ultrasonic sensors
+- mount hc-sr04 distance sensors / mount on head
+- Offline speech synthesis (espeak) on rpi
+- Offline speech recognition (cmu sphinx) on rpi
 - Connect / test MPU
 - Connect pi camera to opencv / simplecv
 - Build slam
-- Mount 3 ultrasonic distance sensors
-- Test/code distance sensors
 
 ## Todo (optional)
 - Add manual control option with Xbox controller
@@ -24,13 +25,14 @@ Raspberry pi robot
 - Monocular slam
 
 ## Done
+- Tested distance sensors
 - setup remote access
-- Tested enoders
+- Tested encoders
 - Test new DC motors
 - Extend robot frame for DC motors, balanced
 - Mount wheels, DC motors, batteries
-- Connected servo's
-- Tested servo's
+- Connected servos
+- Tested servos
 - Connected DC motors
 - Tested DC motors
 - Connected / tested speaker
