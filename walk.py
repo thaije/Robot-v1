@@ -5,7 +5,7 @@ import random
 print "Initializing motors"
 import motors.sne73SoftwarePwm as dcMotorControl
 from motors.servoWirPWM import *
-from ultrasonic_sensor.ussContiuous import *
+from ultrasonic_sensor.ussContinuous import *
 
 
 
@@ -20,20 +20,20 @@ def loop():
             distance = getDistance()
 
             # if an object is closer than 15 cm turn to a random side for 1 second and check again
-            if distance < 15 and distance != -1:
+            if distance < 40 and distance != -1:
 
                 # find a new direction to turn to if we are meeting a new wall
                 if not prevTurn:
                     direction = random.choice([-1,1])
                     prevTurn = True
-		    print distance + " less than 15cm, turning " + direction
+		    print " %s less than 15cm, turning %s" % (distance,  direction)
 		else:
 		    print "Still turning"
             	
 		
                 # turn for 1 second and restart the loop
-                dcMotorControl.turn(direction, 50)
-                sleep(1)
+                dcMotorControl.turn(direction, 100)
+                sleep(0.6)
                 dcMotorControl.stop()
                 continue
 
@@ -41,7 +41,31 @@ def loop():
             else: 
 		print "Going straight"
                 prevTurn = False
-                dcMotorControl.forward(70)
+                dcMotorControl.move(100)
+		#sleep(0.5)
+		#dcMotorControl.stop()
+
+    except KeyboardInterrupt:
+        print "User cancelled"
+
+    except:
+        print "Unexpected error:", sys.exc_info()[0]
+        raise
+
+    finally:
+        print "Cleaning up.."
+        dcMotorControl.cleanup()
+        servoCleanup()
+
+def test(): 
+    try:
+
+	#dcMotorControl.move(100)
+	#sleep(0.5)
+	#dcMotorControl.turn(1,100)
+	#sleep(0.3)
+	dcMotorControl.move(60)
+	sleep(5)
 
     except KeyboardInterrupt:
         print "User cancelled"
@@ -58,6 +82,7 @@ def loop():
 
 def main():
     loop()
+#    test()
 
 
 if __name__ == "__main__":
