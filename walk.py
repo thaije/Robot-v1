@@ -23,10 +23,14 @@ def loop():
             if distance < 15 and distance != -1:
 
                 # find a new direction to turn to if we are meeting a new wall
-                if !prevTurn:
+                if not prevTurn:
                     direction = random.choice([-1,1])
                     prevTurn = True
-
+		    print distance + " less than 15cm, turning " + direction
+		else:
+		    print "Still turning"
+            	
+		
                 # turn for 1 second and restart the loop
                 dcMotorControl.turn(direction, 50)
                 sleep(1)
@@ -35,24 +39,24 @@ def loop():
 
             # go straight
             else: 
+		print "Going straight"
                 prevTurn = False
                 dcMotorControl.forward(70)
 
     except KeyboardInterrupt:
-    print "User cancelled"
+        print "User cancelled"
 
     except:
-    print "Unexpected error:", sys.exc_info()[0]
-    raise
+        print "Unexpected error:", sys.exc_info()[0]
+        raise
 
     finally:
-    print "Cleaning up.."
-    dcMotorControl.cleanup()
-    servoCleanup()
+        print "Cleaning up.."
+        dcMotorControl.cleanup()
+        servoCleanup()
 
 
 def main():
-    setup()
     loop()
 
 
