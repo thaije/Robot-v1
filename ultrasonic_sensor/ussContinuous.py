@@ -1,40 +1,45 @@
 import RPi.GPIO as GPIO                    #Import GPIO library
 import time                                #Import time library
-GPIO.setmode(GPIO.BCM)                     #Set GPIO pin numbering 
-
-#TRIG = 23                                  #Associate pin 23 to TRIG
-#ECHO = 24                                  #Associate pin 24 to ECHO
-TRIG = 26
-ECHO = 16
+GPIO.setmode(GPIO.BOARD)                     #Set GPIO pin numbering 
 
 
-print "Distance measurement in progress"
+# BCM 26 = pin 37
+# BCM 16 = pin 36
+TRIG = 37
+ECHO = 36
+
 
 GPIO.setup(TRIG,GPIO.OUT)                  #Set pin as GPIO out
-GPIO.setup(ECHO,GPIO.IN)                   #Set pin as GPIO in
+GPIO.setup(ECHO,GPIO.IN)  
 
-while True:
 
-  GPIO.output(TRIG, False)                 #Set TRIG as LOW
-  print "Waiting For Sensor To Settle"
-  time.sleep(1)                            #Delay of 2 seconds
+def getDistance():
+    GPIO.output(TRIG, False)                 
+    print "Waiting For Sensor To Settle"
+    time.sleep(1)                            
 
-  GPIO.output(TRIG, True)                  #Set TRIG as HIGH
-  time.sleep(0.00001)                      #Delay of 0.00001 seconds
-  GPIO.output(TRIG, False)                 #Set TRIG as LOW
+    GPIO.output(TRIG, True)                  
+    time.sleep(0.00001)                      
+    GPIO.output(TRIG, False)                
 
-  while GPIO.input(ECHO)==0:               #Check whether the ECHO is LOW
-    pulse_start = time.time()              #Saves the last known time of LOW pulse
+    while GPIO.input(ECHO)==0:               
+    pulse_start = time.time()              
 
-  while GPIO.input(ECHO)==1:               #Check whether the ECHO is HIGH
-    pulse_end = time.time()                #Saves the last known time of HIGH pulse 
+    while GPIO.input(ECHO)==1:               
+    pulse_end = time.time()               
 
-  pulse_duration = pulse_end - pulse_start #Get pulse duration to a variable
+    pulse_duration = pulse_end - pulse_start 
 
-  distance = pulse_duration * 17150        #Multiply pulse duration by 17150 to get distance
-  distance = round(distance, 2)            #Round to two decimal points
+    #Multiply pulse duration by 17150 to get distance and round
+    # to two decimals.
+    distance = pulse_duration * 17150        
+    distance = round(distance, 2)            
 
-  if distance > 2 and distance < 400:      #Check whether the distance is within range
-    print "Distance:",distance - 0.5,"cm"  #Print distance with 0.5 cm calibration
-  else:
-    print "Out Of Range"
+    #Check whether the distance is within range
+    if distance > 2 and distance < 400:      
+        print "Distance:",distance - 0.5,"cm"
+        return distance                     
+    else:
+        print "Out Of Range"
+        return -1
+
