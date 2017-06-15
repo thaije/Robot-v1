@@ -1,8 +1,10 @@
 #!/usr/bin/env python
 
 # srte.py
-# 2017-01-11
-# Public Domain
+
+# Install pigpio http://abyz.co.uk/rpi/pigpio/download.html
+# sudo pigpiod
+# sudo killall pigpiod
 
 import time
 import pigpio # http://abyz.co.uk/rpi/pigpio/python.html

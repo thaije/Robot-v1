@@ -1,7 +1,7 @@
 #how to connect
 - Activate ssh for RPI in config
 - Set password and remember it
-- Get IP of RPI (using modem or something)
+- Get IP of RPI (using modem or nmap, for latter see: https://itsfoss.com/how-to-find-what-devices-are-connected-to-network-in-ubuntu/)
 - connect to RPI using SSH: ssh pi@ip_of_RPI
 - Install vnc server on RPI: sudo apt-get install tightvncserver
 - Start vnc server: vncserver
