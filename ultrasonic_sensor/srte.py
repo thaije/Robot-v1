@@ -73,7 +73,7 @@ if __name__ == "__main__":
       exit()
 
    S=[]
-   #S.append(srte.sonar(pi, None, 20))
+   S.append(srte.sonar(pi, None, 20))
    S.append(srte.sonar(pi,   26, 16))
 
    end = time.time() + 30.0
