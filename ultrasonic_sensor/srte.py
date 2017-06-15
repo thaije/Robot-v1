@@ -87,11 +87,13 @@ if __name__ == "__main__":
             s.trigger()
 
          time.sleep(0.03)
+	
+	 i = 1
+         for s in S:	
+            print("Sensor {} {} {:.1f}".format(i, r, s.read()))
+	    i += 1;
 
-         for s in S:
-            print("{} {:.1f}".format(r, s.read()))
-
-         time.sleep(0.2)
+         time.sleep(0.02)
 
          r += 1
 
