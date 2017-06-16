@@ -4,7 +4,8 @@ Raspberry pi robot
 # Dependencies
 - RPIO
 - RPi.GPIO
-
+- pigpio
+- pyyaml
 
 #Todo
 ## Todo
