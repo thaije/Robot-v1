@@ -69,8 +69,8 @@ def checkEncoders(seconds):
 		timed = 0
 		while(timed < 1):
 			print "Motor 1: %d, Motor 2: %d" % (motor1Ticks, motor2Ticks)
-        	        time.sleep(0.1)
-                	timed += 0.1 
+    	        time.sleep(0.1)
+            	timed += 0.1 
 	except:
 		dcMotorControl.cleanup()
 
