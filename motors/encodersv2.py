@@ -5,6 +5,8 @@ import pigpio
 import rotary_encoder
 import sne73SoftwarePwm as dcMotorControl
 
+# One rotation is 360 ticks
+# Forwards is positive, backwards is negative
 
 pos = 0
 
@@ -15,12 +17,13 @@ def callback(way):
    pos += way
 
    print("pos={}".format(pos))
+   
 
 
 def checkEncoders(seconds):
    
    try:  
-      dcMotorControl.move(100)
+      dcMotorControl.move(50)
       timed = 0
       while(timed < seconds):
          time.sleep(0.1)
@@ -42,15 +45,15 @@ def checkEncoders(seconds):
 
 pi = pigpio.pi()
 
-decoder = rotary_encoder.decoder(pi, 7, 8, callback)
-
+decoder = rotary_encoder.decoder(pi, 14, 15, callback)
+#decoder = rotary_encoder.decoder(pi, 27, 17, callback)
 
 
 print "Starting motors"
-checkEncoders(3)
+checkEncoders(0.75)
 
 
-time.sleep(300)
+time.sleep(1)
 
 decoder.cancel()
 

@@ -48,13 +48,13 @@ def main():
 	time.sleep(1)
 
 	print "Starting motors"
-	checkEncoders(3)
+	checkEncoders(0.78)
 	
 
 def checkEncoders(seconds):
 	
 	try:	
-		dcMotorControl.move(100)
+		dcMotorControl.move(50)
 		timed = 0
 		while(timed < seconds):
 			print "Motor 1: %d, Motor 2: %d" % (motor1Ticks, motor2Ticks)
@@ -69,11 +69,11 @@ def checkEncoders(seconds):
 		timed = 0
 		while(timed < 1):
 			print "Motor 1: %d, Motor 2: %d" % (motor1Ticks, motor2Ticks)
-    	        time.sleep(0.1)
-            	timed += 0.1 
+    	        	time.sleep(0.1)
+            		timed += 0.1 
 	except:
 		dcMotorControl.cleanup()
-
+	dcMotorControl.cleanup()
 
 def test():
     # Wrap main content in a try block so we can
@@ -89,6 +89,7 @@ def test():
         dcMotorControl.move(50)
         t_end = time.time() + 0.77
         while time.time() < t_end:
+
             time.sleep(0.001)
 
         dcMotorControl.stop()
@@ -127,16 +128,16 @@ print("Setup GPIO pin as input on GPIO17")
 
 # testing
 GPIO.setup(17, GPIO.IN)
-GPIO.add_event_detect(17, GPIO.RISING, callback=motor1Callback)
+GPIO.add_event_detect(17, GPIO.BOTH, callback=motor1Callback)
 
-#GPIO.setup(27, GPIO.IN)
-#GPIO.add_event_detect(27, GPIO.BOTH, callback=motor1Callback)
+GPIO.setup(27, GPIO.IN)
+GPIO.add_event_detect(27, GPIO.BOTH, callback=motor1Callback)
 
-#GPIO.setup(5, GPIO.IN)
-#GPIO.add_event_detect(5, GPIO.BOTH, callback=motor2Callback)
+GPIO.setup(14, GPIO.IN)
+GPIO.add_event_detect(14, GPIO.BOTH, callback=motor2Callback)
 
-#GPIO.setup(6, GPIO.IN)
-#GPIO.add_event_detect(6, GPIO.BOTH, callback=motor2Callback)
+GPIO.setup(15, GPIO.IN)
+GPIO.add_event_detect(15, GPIO.BOTH, callback=motor2Callback)
 
 
 

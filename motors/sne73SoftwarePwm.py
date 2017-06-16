@@ -70,9 +70,9 @@ def move(s):
 
 # stop turning of motors
 def stop():
-    motor1.stop()
-    motor2.stop()
-
+#    motor1.stop()
+	motor2.stop()
+	motor1.stop()
 
 # turn the robot
 # s = speed / direction [-99,99]

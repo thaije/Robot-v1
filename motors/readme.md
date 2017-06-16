@@ -60,8 +60,8 @@ File: servoWirPWM.py
 - ground pins from encoders to pinout board ground
 - Right motor encoder output 1 (yellow) to BCM 17 / pin 11
 - Right motor encoder output 2 (green) to BCM 27 / pin 13
-- Left motor encoder ouput 1 (yellow) to BCM 5 / pin 29
-- Left motor encoder ouput 2 (green) to BCM 6 / pin 31
+- Left motor encoder ouput 1 (yellow) to BCM 14 / pin 29
+- Left motor encoder ouput 2 (green) to BCM 15 / pin 31
 
 #### DC motor 1:
 pinForward, pinBackward, pinControl):
