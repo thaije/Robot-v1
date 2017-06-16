@@ -39,4 +39,12 @@ Raspberry pi robot
 - Connected / tested mic
 
 
+Parts:
+- 3 HC-sr04 sonars 
+- raspberry pi camera v2
+- rpi 2b
+- 2 hitec servo's
+- 2 V-TEC 6V Mini 25D DC Motors 177 RPM with encoders (https://eckstein-shop.de/V-TEC-6V-Mini-25D-DC-Motor-Getriebe-Motor-Stirnradgetriebe-mit-Encoder-177-RPM-EN)
+- 2 Pololu Wheel 90×10mm Pair - Black
+
 

@@ -75,16 +75,17 @@ def stop():
 
 
 # turn the robot
-# r = direction, r > 0=leftturn, r < 0=rightturn
-# s = speed [1,99]
-def turn(r,s):
-    s = clamp(s, 0, 99)
+# s = speed / direction [-99,99]
+# s < 0 = turn left, s > 0 = turn right
+def turn(s):
+    s = clamp(s, -99, 99)
 
-    # turn left
-    if r > 0:
+    # turn right
+    if s > 0:
         motor1.backward(s)
         motor2.forward(s)
-    elif r < 0:
+    # turn left
+    elif s < 0:
         motor1.forward(s)
         motor2.backward(s)
 

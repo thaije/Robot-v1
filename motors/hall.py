@@ -13,7 +13,7 @@ import sne73SoftwarePwm as dcMotorControl
 # Counter: Revolutions * Dc motor gearbox ratio * hall effect sensor ticks
 # per revolution
 # Gearbox ratio is 35
-# Ticks per revolution = 12 for 1 sensor, 48 for 2
+# Ticks per revolution = 18 for 1 sensor, 48 for 2
 
 # Right motor / motor 2:
 # pin 17: 628 ticks per revolution
@@ -42,11 +42,15 @@ def motor2Callback(chanel):
 
 
 def main():
-  # Wrap main content in a try block so we can
-  # catch the user pressing CTRL-C and run the
-  # GPIO cleanup function. This will also prevent
-  # the user seeing lots of unnecessary error
-  # messages.
+    test()
+
+
+def test():
+    # Wrap main content in a try block so we can
+    # catch the user pressing CTRL-C and run the
+    # GPIO cleanup function. This will also prevent
+    # the user seeing lots of unnecessary error
+    # messages.
 
     global motor1Ticks
     global motor2Ticks
@@ -90,17 +94,19 @@ print("Setup GPIO pin as input on GPIO17")
 #GPIO.setup(31, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 #GPIO.add_event_detect(13, GPIO.BOTH, callback=sensorCallback, bouncetime=200)
 
+
+# testing
 GPIO.setup(17, GPIO.IN)
-GPIO.add_event_detect(17, GPIO.BOTH, callback=motor1Callback)
+GPIO.add_event_detect(17, GPIO.RISING, callback=motor1Callback)
 
-GPIO.setup(27, GPIO.IN)
-GPIO.add_event_detect(27, GPIO.BOTH, callback=motor1Callback)
+#GPIO.setup(27, GPIO.IN)
+#GPIO.add_event_detect(27, GPIO.BOTH, callback=motor1Callback)
 
-GPIO.setup(5, GPIO.IN)
-GPIO.add_event_detect(5, GPIO.BOTH, callback=motor2Callback)
+#GPIO.setup(5, GPIO.IN)
+#GPIO.add_event_detect(5, GPIO.BOTH, callback=motor2Callback)
 
-GPIO.setup(6, GPIO.IN)
-GPIO.add_event_detect(6, GPIO.BOTH, callback=motor2Callback)
+#GPIO.setup(6, GPIO.IN)
+#GPIO.add_event_detect(6, GPIO.BOTH, callback=motor2Callback)
 
 
 
