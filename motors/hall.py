@@ -1,21 +1,7 @@
-#!/usr/bin/python
-#--------------------------------------
-#    ___  ___  _ ____
-#   / _ \/ _ \(_) __/__  __ __
-#  / , _/ ___/ /\ \/ _ \/ // /
-# /_/|_/_/  /_/___/ .__/\_, /
-#                /_/   /___/
-#
-#       Hall Effect Sensor
-#
-# This script tests the sensor on GPIO17.
-#
-# Author : Matt Hawkins
-# Date   : 03/04/2017
-#
-# http://www.raspberrypi-spy.co.uk/
-#
-#--------------------------------------
+# Original author : Matt Hawkins
+# From http://www.raspberrypi-spy.co.uk/
+
+# BCM pin numbering
 
 # Import required libraries
 import time
@@ -30,13 +16,13 @@ import sne73SoftwarePwm as dcMotorControl
 # Ticks per revolution = 12 for 1 sensor, 48 for 2
 
 # Right motor / motor 2:
-# pin 11: 628 ticks per revolution
-# pin 13: 628 ticks per revolution
+# pin 17: 628 ticks per revolution
+# pin 27: 628 ticks per revolution
 # Together is 1256
 
 # Left motor / motor 1:
-# pin 29: 650 ticks per revolution
-# pin 31: 650 ticks per revolution
+# pin 5: 650 ticks per revolution
+# pin 6: 650 ticks per revolution
 # Together = 1300 ticks
 
 motor1Ticks = 0
@@ -104,17 +90,17 @@ print("Setup GPIO pin as input on GPIO17")
 #GPIO.setup(31, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 #GPIO.add_event_detect(13, GPIO.BOTH, callback=sensorCallback, bouncetime=200)
 
-GPIO.setup(11, GPIO.IN)
-GPIO.add_event_detect(11, GPIO.BOTH, callback=motor1Callback)
+GPIO.setup(17, GPIO.IN)
+GPIO.add_event_detect(17, GPIO.BOTH, callback=motor1Callback)
 
-GPIO.setup(13, GPIO.IN)
-GPIO.add_event_detect(13, GPIO.BOTH, callback=motor1Callback)
+GPIO.setup(27, GPIO.IN)
+GPIO.add_event_detect(27, GPIO.BOTH, callback=motor1Callback)
 
-GPIO.setup(29, GPIO.IN)
-GPIO.add_event_detect(29, GPIO.BOTH, callback=motor2Callback)
+GPIO.setup(5, GPIO.IN)
+GPIO.add_event_detect(5, GPIO.BOTH, callback=motor2Callback)
 
-GPIO.setup(31, GPIO.IN)
-GPIO.add_event_detect(31, GPIO.BOTH, callback=motor2Callback)
+GPIO.setup(6, GPIO.IN)
+GPIO.add_event_detect(6, GPIO.BOTH, callback=motor2Callback)
 
 
 

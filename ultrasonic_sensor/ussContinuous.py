@@ -1,12 +1,16 @@
 import RPi.GPIO as GPIO                    #Import GPIO library
 import time                                #Import time library
-GPIO.setmode(GPIO.BOARD)                     #Set GPIO pin numbering 
-
+#GPIO.setmode(GPIO.BOARD)                     #Set GPIO pin numbering 
 
 # BCM 26 = pin 37
 # BCM 16 = pin 36
-TRIG = 37
-ECHO = 36
+# GPIO.setmode(GPIO.BOARD) 
+# TRIG = 37
+# ECHO = 36
+
+GPIO.setmode(GPIO.BCM)
+TRIG = 26
+ECHO = 16
 
 
 GPIO.setup(TRIG,GPIO.OUT)                  #Set pin as GPIO out

@@ -8,7 +8,8 @@
 import RPi.GPIO as GPIO
 from time import sleep
 
-GPIO.setmode(GPIO.BOARD)
+#GPIO.setmode(GPIO.BOARD)
+GPIO.setmode(GPIO.BCM)
 
 
 class Motor:
@@ -116,9 +117,12 @@ def test():
 # initiliase motors
 # motor1 = sne73 right side
 # motor2 = sne73 left side
-motor1 = Motor(16, 22, 18)
+
+# motor1 = Motor(16, 22, 18) # Board pins
+motor1 = Motor(23, 25, 24) # BCM
 print "DC motor 1 online"
-motor2 = Motor(23, 19, 21)
+# motor2 = Motor(23, 19, 21) # Board pins
+motor2 = Motor(11, 10, 9) # BCM
 print "DC motor 2 online"
 
 
