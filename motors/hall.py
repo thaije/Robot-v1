@@ -105,41 +105,26 @@ def test():
 
     dcMotorControl.cleanup()
 
-# Tell GPIO library to use GPIO references
-#GPIO.setmode(GPIO.BCM)
-
-print("Setup GPIO pin as input on GPIO17")
-
-# Set Switch GPIO as input
-# Pull high by default
-#GPIO.setup(11, GPIO.IN, pull_up_down=GPIO.PUD_UP) # or down?
-#GPIO.add_event_detect(11, GPIO.BOTH, callback=sensorCallback, bouncetime=200)
-
-#GPIO.setup(13, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-#GPIO.add_event_detect(13, GPIO.BOTH, callback=sensorCallback, bouncetime=200)
 
 
-#GPIO.setup(29, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-#GPIO.add_event_detect(13, GPIO.BOTH, callback=sensorCallback, bouncetime=200)
+def setup():
+    print("Setup GPIO pin as input on GPIO17")
 
-#GPIO.setup(31, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-#GPIO.add_event_detect(13, GPIO.BOTH, callback=sensorCallback, bouncetime=200)
+    # testing
+    GPIO.setup(17, GPIO.IN)
+    GPIO.add_event_detect(17, GPIO.BOTH, callback=motor1Callback)
 
+    GPIO.setup(27, GPIO.IN)
+    GPIO.add_event_detect(27, GPIO.BOTH, callback=motor1Callback)
 
-# testing
-GPIO.setup(17, GPIO.IN)
-GPIO.add_event_detect(17, GPIO.BOTH, callback=motor1Callback)
+    GPIO.setup(14, GPIO.IN)
+    GPIO.add_event_detect(14, GPIO.BOTH, callback=motor2Callback)
 
-GPIO.setup(27, GPIO.IN)
-GPIO.add_event_detect(27, GPIO.BOTH, callback=motor1Callback)
-
-GPIO.setup(14, GPIO.IN)
-GPIO.add_event_detect(14, GPIO.BOTH, callback=motor2Callback)
-
-GPIO.setup(15, GPIO.IN)
-GPIO.add_event_detect(15, GPIO.BOTH, callback=motor2Callback)
+    GPIO.setup(15, GPIO.IN)
+    GPIO.add_event_detect(15, GPIO.BOTH, callback=motor2Callback)
 
 
 
 if __name__ == "__main__":
+    setup()
     main()
