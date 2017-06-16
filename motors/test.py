@@ -20,7 +20,7 @@ def callback(way):
 def checkEncoders(seconds):
    
    try:  
-      dcMotorControl.move(100)
+      dcMotorControl.move(50)
       timed = 0
       while(timed < seconds):
          time.sleep(0.1)
@@ -42,15 +42,15 @@ def checkEncoders(seconds):
 
 pi = pigpio.pi()
 
-decoder = rotary_encoder.decoder(pi, 7, 8, callback)
-
+decoder = rotary_encoder.decoder(pi, 5, 6, callback)
+#decoder = rotary_encoder.decoder(pi, 27, 17, callback)
 
 
 print "Starting motors"
-checkEncoders(3)
+checkEncoders(0.8)
 
 
-time.sleep(300)
+time.sleep(1)
 
 decoder.cancel()
 
