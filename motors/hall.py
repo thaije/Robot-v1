@@ -42,7 +42,37 @@ def motor2Callback(chanel):
 
 
 def main():
-    test()
+	# test()	
+	
+	print "Motor 1: %d, Motor 2: %d" % (motor1Ticks, motor2Ticks)
+	time.sleep(1)
+
+	print "Starting motors"
+	checkEncoders(3)
+	
+
+def checkEncoders(seconds):
+	
+	try:	
+		dcMotorControl.move(100)
+		timed = 0
+		while(timed < seconds):
+			print "Motor 1: %d, Motor 2: %d" % (motor1Ticks, motor2Ticks)
+			time.sleep(0.1)
+			timed += 0.1
+	
+		print "stopping motors"	
+		dcMotorControl.stop()   
+		dcMotorControl.cleanup()
+	
+		# check if it continues turning during breaking
+		timed = 0
+		while(timed < 1):
+			print "Motor 1: %d, Motor 2: %d" % (motor1Ticks, motor2Ticks)
+        	        time.sleep(0.1)
+                	timed += 0.1 
+	except:
+		dcMotorControl.cleanup()
 
 
 def test():
