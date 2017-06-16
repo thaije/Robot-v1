@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+# Pigpio Python code for rotary encoder from http://abyz.co.uk/rpi/pigpio/examples.html#Python code
 
 import pigpio
 

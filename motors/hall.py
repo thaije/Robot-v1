@@ -15,15 +15,15 @@ import sne73SoftwarePwm as dcMotorControl
 # Gearbox ratio is 35
 # Ticks per revolution = 18 for 1 sensor, 48 for 2
 
-# Right motor / motor 2:
-# pin 17: 628 ticks per revolution
-# pin 27: 628 ticks per revolution
-# Together is 1256
+# Right motor / motor 1:
+# pin 17: 640 ticks per revolution
+# pin 27: 640 ticks per revolution
+# Together is 1280
 
-# Left motor / motor 1:
-# pin 5: 650 ticks per revolution
-# pin 6: 650 ticks per revolution
-# Together = 1300 ticks
+# Left motor / motor 2:
+# pin 14: 640 ticks per revolution
+# pin 15: 640 ticks per revolution
+# Together = 1280 ticks
 
 motor1Ticks = 0
 motor2Ticks = 0
