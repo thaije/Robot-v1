@@ -6,8 +6,15 @@ import hall as wheelEncoders
 
 
 # Values to correct speed of motors
-# [forward, backward, right, left]
-motorCalibration = [1.0, 1.0, 1.0, 1.0]
+# [forward fast [r, l], 
+#  forward normal [r, l], 
+#  backward fast [r, l],
+#  backward normal [r, l],
+#  right fast [r, l],
+#  right normal [r, l], 
+#  left fast [r, l],
+#  left normal [r, l]]
+motorCalibration = []
 
 
 def calibrateMotors(speed, turn = False):
@@ -16,28 +23,51 @@ def calibrateMotors(speed, turn = False):
 	wheelEncoders.motor2Ticks = 0
 
 	try:
+		# test a turn or a straight piece depending on given command
 		if turn:
 			dcMotorControl.turn(speed)
 		else:
 			dcMotorControl.move(speed)
 		sleep(2)
 		dcMotorControl.stop()
-		return wheelEncoders.motor1Ticks / wheelEncoders.motor2Ticks
+
+		# Compare the progress of both wheels
+		factor = wheelEncoders.motor1Ticks / wheelEncoders.motor2Ticks
+
+		# Check which wheels goes faster, and limit one of both
+		if factor > 0:
+			left = 1
+			right = left / right
+		else: 
+			right = 1 
+			left = factor
+
+		return [right, left]
 
 	except:
 		dcMotorControl.stop()
         print "Unexpected error during motor calibration:", sys.exc_info()[0]
         raise
 
+        return False
+
 
 
 def calibrate():
 	global motorCalibration
 
-	motorCalibration[0] = calibrateMotors(100)
-	motorCalibration[1] = calibrateMotors(-100)
-	motorCalibration[2] = calibrateMotors(100, turn = True)
-	motorCalibration[3] = calibrateMotors(-100, turn = True)
+	# forward
+	motorCalibration[] = calibrateMotors(50)
+	motorCalibration[] = calibrateMotors(100)
+	# backward
+	motorCalibration[] = calibrateMotors(-50)
+	motorCalibration[] = calibrateMotors(-100)
+	# turn right
+	motorCalibration[] = calibrateMotors(50, turn = True)
+	motorCalibration[] = calibrateMotors(100, turn = True)
+	#turn left
+	motorCalibration[] = calibrateMotors(-50, turn = True)
+	motorCalibration[] = calibrateMotors(-100, turn = True)
 
 	print "Results:"
 	print motorCalibration
@@ -55,10 +85,16 @@ if __name__ == "__main__":
 Right = 3400
 Left = 2900
 
-3400 / 2900 = 
 
-100 / 3400
+factor = ticksRight / ticksLeft 
+
+# Check which wheels goes faster, and limit one of both
+if factor > 0:
+	left = 1
+	right = left / right
+else: 
+	right = 1 
+	left = factor
 
 
-Right / left
 

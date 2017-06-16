@@ -2,7 +2,7 @@
 import time
 import pigpio
 
-import rotary_encoder
+import pigpio_encoder
 import sne73SoftwarePwm as dcMotorControl
 
 # One rotation is 360 ticks
