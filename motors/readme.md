@@ -37,12 +37,12 @@ File: servoWirPWM.py
 ### Wiring
 - See photos in folder for wiring
 - sne73 flipped to right, pins mentioned are board pins
-- Pin 16 - sne73 left 7
-- Pin 18 - sne73 left 1
-- Pin 19 - sne73 right 7
-- Pin 21 - sne73 right 8
-- Pin 22 - sne73 left 2
-- Pin 23 - sne73 right 2
+- BCM pin 23 - sne73 left 7
+- BCM pin 24 - sne73 left 1
+- BCM pin 10 - sne73 right 7
+- BCM pin 9 - sne73 right 8
+- BCM pin 25 - sne73 left 2
+- BCM pin 11 - sne73 right 2
 - Pin 2 (5v) - sne73 right 1
 - Connect 6v external power to pinout board
 - Connect pinout board + to sne73 left 8
@@ -65,20 +65,16 @@ File: servoWirPWM.py
 
 #### DC motor 1:
 pinForward, pinBackward, pinControl):
-Motor(16, 22, 18) (Board pins)
+motor1 = Motor(23, 25, 24) (BCM pins)
 
 #### DC motor 2:
 pinForward, pinBackward, pinControl):
-Motor(23, 19, 21) (Board pins)
+motor2 = Motor(11, 10, 9) (BCM pins)
 
 
 # Extra needed parts:
 - PWM adafruit shield
 - ultrasonic sensor (3?)
-- power connect cable: Tamiya connector
 - stronger motor shield (sne73 can handle max 650ma, stall for motors is 2600ma)
-- dc motors with encoder
 - motor clamps 
-- usb microphone
-- 1kΩ Resistor
-- 2kΩ Resistor
+- Laser?
