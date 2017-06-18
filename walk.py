@@ -3,7 +3,7 @@ import sys
 import random
 
 print "Initializing motors"
-import motors.sne73SoftwarePwm as dcMotorControl
+import motors.sn75SoftwarePwm as dcMotorControl
 from motors.servoWirPWM import *
 from ultrasonic_sensor.ussContinuous import *
 

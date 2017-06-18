@@ -3,7 +3,7 @@ import time
 import pigpio
 
 import pigpio_encoder
-import sne73SoftwarePwm as dcMotorControl
+import sn75SoftwarePwm as dcMotorControl
 
 # One rotation is 360 ticks
 # Forwards is positive, backwards is negative

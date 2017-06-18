@@ -1,5 +1,5 @@
 # Robot
-Raspberry pi robot
+Raspberry pi robot using 
 
 # Dependencies
 - RPIO
@@ -7,12 +7,24 @@ Raspberry pi robot
 - pigpio
 - pyyaml
 
+# Parts:
+- Raspberry pi 2b
+- 2 V-tec 6v 177 RPM DC motors with 90mm wheels
+- SN754410 H-bridge for DC motor control
+- Castor/ ball wheel
+- 2 180 degree servo's with pan-tilt set
+- Raspberry pi v2 camera mounted on pan-tilt set
+- 3 HC-SR04 sonars, 1 mounted on pan-tilt set, 2 mounted at front at a 20°. 
+- Xiaomi 10000 mAh powerbank for rpi
+- 3300 mAh NiMh battery for servos / dc motors 
+- 2 Pinout boards
+- Pinout cables
+
+
 #Todo
 ## Todo
 - Align motors (ticks per revolution)
 - Make calibration method for motors
-- write readme for ultrasonic sensors
-- mount hc-sr04 distance sensors / mount on head
 - Offline speech synthesis (espeak) on rpi
 - Offline speech recognition (cmu sphinx) on rpi
 - Connect / test MPU
@@ -26,6 +38,8 @@ Raspberry pi robot
 - Monocular slam
 
 ## Done
+- Mounted sonars / camera on head
+- Write readme for sonars
 - Tested distance sensors
 - setup remote access
 - Tested encoders

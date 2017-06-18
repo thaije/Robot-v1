@@ -1,7 +1,7 @@
 
 from time import sleep
 
-import sne73SoftwarePwm as dcMotorControl
+import sn75SoftwarePwm as dcMotorControl
 import hall as wheelEncoders
 
 

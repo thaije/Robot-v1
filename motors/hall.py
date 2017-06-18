@@ -8,7 +8,7 @@ import time
 import datetime
 import RPi.GPIO as GPIO
 
-import sne73SoftwarePwm as dcMotorControl
+import sn75SoftwarePwm as dcMotorControl
 
 # Counter: Revolutions * Dc motor gearbox ratio * hall effect sensor ticks
 # per revolution
