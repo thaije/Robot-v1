@@ -1,0 +1,9 @@
+sonar:
+  trigger: 26
+  sonars:
+    - position: "head"
+      echo: 21
+    - position: "left"
+      echo: 20
+    - position: "right"
+      echo: 16

@@ -2,6 +2,8 @@
 
 # srte.py
 
+# How to run:
+# install according to readme
 # Install pigpio http://abyz.co.uk/rpi/pigpio/download.html
 # sudo pigpiod
 # sudo killall pigpiod
@@ -73,6 +75,9 @@ if __name__ == "__main__":
       exit()
 
    S=[]
+   # Head sonar
+   S.append(srte.sonar(pi, None, 21))
+   # Front sonars
    S.append(srte.sonar(pi, None, 20))
    S.append(srte.sonar(pi,   26, 16))
 
