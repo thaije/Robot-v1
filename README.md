@@ -9,10 +9,11 @@ Raspberry pi robot using
 
 # Parts:
 - Raspberry pi 2b
-- 2 V-tec 6v 177 RPM DC motors with 90mm wheels
+- 2 V-tec 6v 177 RPM DC motors (https://eckstein-shop.de/V-TEC-6V-Mini-25D-DC-Motor-Getriebe-Motor-Stirnradgetriebe-mit-Encoder-177-RPM-EN)
+- 2 Pololu Wheel 90×10mm Pair - Black
 - SN754410 H-bridge for DC motor control
 - Castor/ ball wheel
-- 2 180 degree servo's with pan-tilt set
+- 2 Hitec HS-422 180 degree servo's with pan-tilt set
 - Raspberry pi v2 camera mounted on pan-tilt set
 - 3 HC-SR04 sonars, 1 mounted on pan-tilt set, 2 mounted at front at a 20°. 
 - Xiaomi 10000 mAh powerbank for rpi
@@ -52,14 +53,3 @@ Raspberry pi robot using
 - Tested DC motors
 - Connected / tested speaker
 - Connected / tested mic
-
-
-Parts:
-- 3 HC-sr04 sonars 
-- raspberry pi camera v2
-- rpi 2b
-- 2 hitec servo's
-- 2 V-TEC 6V Mini 25D DC Motors 177 RPM with encoders (https://eckstein-shop.de/V-TEC-6V-Mini-25D-DC-Motor-Getriebe-Motor-Stirnradgetriebe-mit-Encoder-177-RPM-EN)
-- 2 Pololu Wheel 90×10mm Pair - Black
-
-
