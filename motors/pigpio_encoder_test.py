@@ -46,7 +46,7 @@ def checkEncoders(seconds):
 pi = pigpio.pi()
 
 decoder = rotary_encoder.decoder(pi, 14, 15, callback)
-#decoder = rotary_encoder.decoder(pi, 27, 17, callback)
+#decoder = rotary_encoder.decoder(pi, 17, 27, callback)
 
 
 print "Starting motors"
