@@ -83,14 +83,20 @@ def setup():
     S.append(sonar(pi, None, 20))
     S.append(sonar(pi,   26, 16))
 
-    end = time.time() + 30.0
 
 def cleanup():
-   global pi
-   pi.stop()
+    global pi
+    global S
+
+    for s in S:
+        s.cancel()
+
+    pi.stop()
+
 
 # read the proximity sensors
 def read_proximity_sensors():
+    global S
 
     # [Head sonar, right sonar, left sonar]
     proximity = []
@@ -108,9 +114,6 @@ def read_proximity_sensors():
 
     except KeyboardInterrupt:
         pass
-
-    for s in S:
-        s.cancel()
 
     return proximity
 
