@@ -114,12 +114,10 @@ def read_proximity_sensors():
 
     return proximity
 
+
 if __name__ == "__main__":
 
-    # setup()
-    # readings = read_proximity_sensors()
-    # print readings
-    # cleanup()
+    #test2()
     test()
 
 
@@ -141,43 +139,44 @@ def test2():
 
     cleanup()
 
+
 def test():
-   import time
-   import pigpio
-   import srte
+    import time
+    import pigpio
+    import srte
 
-   pi = pigpio.pi()
+    pi = pigpio.pi()
 
-   if not pi.connected:
-      exit()
+    if not pi.connected:
+        exit()
 
-   S=[]
-   # Head sonar
-   S.append(srte.sonar(pi, None, 21))
-   # Front sonars
-   S.append(srte.sonar(pi, None, 20))
-   S.append(srte.sonar(pi,   26, 16))
+    S=[]
+    # Head sonar
+    S.append(srte.sonar(pi, None, 21))
+    # Front sonars
+    S.append(srte.sonar(pi, None, 20))
+    S.append(srte.sonar(pi,   26, 16))
 
-   end = time.time() + 30.0
+    end = time.time() + 30.0
 
-   r = 1
+    r = 1
 
-   try:
-      while time.time() < end:
+    try:
+        while time.time() < end:
 
-     	for s in S:
-            s.trigger()
+            for s in S:
+                s.trigger()
 
-        time.sleep(0.03)
+            time.sleep(0.03)
 	
-        i = 1
-        for s in S:	
-            print("Sensor {} {} {:.1f}".format(i, r, s.read()))
-            i += 1;
+            i = 1
+            for s in S:	
+                print("Sensor {} {} {:.1f}".format(i, r, s.read()))
+                i += 1;
 
-        time.sleep(0.02)
+            time.sleep(0.02)
 
-        r += 1
+            r += 1
 
     except KeyboardInterrupt:
         pass
