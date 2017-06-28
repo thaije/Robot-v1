@@ -24,11 +24,11 @@ File: servoWirPWM.py
 
 
 # DC Motors
-- File: sne73SoftwarePWM.py
+- File: sn75SoftwarePWM.py
 - Tutorial from: http://www.knight-of-pi.org/simple-dc-motor-board-for-the-raspberry-pi-with-ic-l293-and-software-pulse-width-modulation/ 
 
 ### Parts
-- sne73 chip
+- sn75 chip
 - external 6v battery (shared with servos)
 - pinout board
 - 2 dc motors
@@ -36,22 +36,22 @@ File: servoWirPWM.py
 
 ### Wiring
 - See photos in folder for wiring
-- sne73 flipped to right, pins mentioned are board pins
-- BCM pin 23 - sne73 left 7
-- BCM pin 24 - sne73 left 1
-- BCM pin 10 - sne73 right 7
-- BCM pin 9 - sne73 right 8
-- BCM pin 25 - sne73 left 2
-- BCM pin 11 - sne73 right 2
-- Pin 2 (5v) - sne73 right 1
+- sn75 flipped to right, pins mentioned are board pins
+- BCM pin 23 - sn75 left 7
+- BCM pin 24 - sn75 left 1
+- BCM pin 10 - sn75 right 7
+- BCM pin 9 - sn75 right 8
+- BCM pin 25 - sn75 left 2
+- BCM pin 11 - sn75 right 2
+- Pin 2 (5v) - sn75 right 1
 - Connect 6v external power to pinout board
-- Connect pinout board + to sne73 left 8
+- Connect pinout board + to sn75 left 8
 - Pinout board ground to RPI ground
-- Pinout board ground to: sne73 left 4 / 5 / sne73 right 4 / 5
-- DC motor 1 green to sne73 right 3
-- DC motor 1 yellow to sne73 right 6
-- DC motor 2 green to sne73 left 3
-- DC motor 2 yellow to sne73 left 6
+- Pinout board ground to: sn75 left 4 / 5 / sn75 right 4 / 5
+- DC motor 1 green to sn75 right 3
+- DC motor 1 yellow to sn75 right 6
+- DC motor 2 green to sn75 left 3
+- DC motor 2 yellow to sn75 left 6
 
 #### Encoder wiring
 - 3v3 pin (pin 1) to pinout board (not same side as 6v)
@@ -75,6 +75,6 @@ motor2 = Motor(11, 10, 9) (BCM pins)
 # Extra needed parts:
 - PWM adafruit shield
 - ultrasonic sensor (3?)
-- stronger motor shield (sne73 can handle max 650ma, stall for motors is 2600ma)
+- stronger motor shield (sn75 can handle max 650ma, stall for motors is 2600ma)
 - motor clamps 
 - Laser?

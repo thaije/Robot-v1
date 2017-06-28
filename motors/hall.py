@@ -111,10 +111,10 @@ def setup():
     print("Setup GPIO pin as input on GPIO17")
 
     # testing
-    GPIO.setup(17, GPIO.IN)
+    GPIO.setup(5, GPIO.IN)
     GPIO.add_event_detect(17, GPIO.BOTH, callback=motor1Callback)
 
-    GPIO.setup(27, GPIO.IN)
+    GPIO.setup(6, GPIO.IN)
     GPIO.add_event_detect(27, GPIO.BOTH, callback=motor1Callback)
 
     GPIO.setup(14, GPIO.IN)
