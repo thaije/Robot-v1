@@ -48,7 +48,7 @@ def main():
 	time.sleep(1)
 
 	print "Starting motors"
-	checkEncoders(0.78)
+	checkEncoders(3.00)
 	
 
 def checkEncoders(seconds):
