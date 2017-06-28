@@ -67,8 +67,10 @@ class sonar:
 
 
 S = []
+pi = None
 
 def setup():
+    global pi
     pi = pigpio.pi()
 
     if not pi.connected:
@@ -76,21 +78,21 @@ def setup():
 
     global S
     # Head sonar
-    S.append(srte.sonar(pi, None, 21))
+    S.append(sonar(pi, None, 21))
     # Front sonars
-    S.append(srte.sonar(pi, None, 20))
-    S.append(srte.sonar(pi,   26, 16))
+    S.append(sonar(pi, None, 20))
+    S.append(sonar(pi,   26, 16))
 
     end = time.time() + 30.0
 
 def cleanup():
-
+   global pi
    pi.stop()
 
 # read the proximity sensors
 def read_proximity_sensors():
 
-    # [Head sonar, left sonar, right sonar]
+    # [Head sonar, right sonar, left sonar]
     proximity = []
 
     try:
@@ -109,6 +111,8 @@ def read_proximity_sensors():
 
     for s in S:
         s.cancel()
+
+    return proximity
 
 if __name__ == "__main__":
 
