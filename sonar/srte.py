@@ -115,11 +115,6 @@ def read_proximity_sensors():
     return proximity
 
 
-if __name__ == "__main__":
-
-    #test2()
-    test()
-
 
 def test2():
     
@@ -187,3 +182,10 @@ def test():
       s.cancel()
 
     pi.stop()
+
+
+
+if __name__ == "__main__":
+
+    #test2()
+    test()
