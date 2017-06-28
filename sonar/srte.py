@@ -34,7 +34,7 @@ class sonar:
       self.pi = pi
       self.trig = trigger
 
-      self._distance = -1
+      self._distance = 999.9
       self._one_tick = None
 
       if trigger is not None:
@@ -54,7 +54,7 @@ class sonar:
             self._one_tick = None
 
    def trigger(self):
-      self._distance = -1
+      self._distance = 999.9
       self._one_tick = None
 
       if self.trig is not None:
@@ -113,56 +113,57 @@ def read_proximity_sensors():
 
 if __name__ == "__main__":
 
-    setup()
-    readings = read_proximity_sensors()
-    print readings
-    cleanup()
+    # setup()
+    # readings = read_proximity_sensors()
+    # print readings
+    # cleanup()
+    test()
 
 
-# def test():
-#    import time
-#    import pigpio
-#    import srte
+def test():
+   import time
+   import pigpio
+   import srte
 
-#    pi = pigpio.pi()
+   pi = pigpio.pi()
 
-#    if not pi.connected:
-#       exit()
+   if not pi.connected:
+      exit()
 
-#    S=[]
-#    # Head sonar
-#    S.append(srte.sonar(pi, None, 21))
-#    # Front sonars
-#    S.append(srte.sonar(pi, None, 20))
-#    S.append(srte.sonar(pi,   26, 16))
+   S=[]
+   # Head sonar
+   S.append(srte.sonar(pi, None, 21))
+   # Front sonars
+   S.append(srte.sonar(pi, None, 20))
+   S.append(srte.sonar(pi,   26, 16))
 
-#    end = time.time() + 30.0
+   end = time.time() + 30.0
 
-#    r = 1
+   r = 1
 
-#    try:
-#       while time.time() < end:
+   try:
+      while time.time() < end:
 
-#      	for s in S:
-#             s.trigger()
+     	for s in S:
+            s.trigger()
 
-#         time.sleep(0.03)
+        time.sleep(0.03)
 	
-#         i = 1
-#         for s in S:	
-#             print("Sensor {} {} {:.1f}".format(i, r, s.read()))
-#             i += 1;
+        i = 1
+        for s in S:	
+            print("Sensor {} {} {:.1f}".format(i, r, s.read()))
+            i += 1;
 
-#         time.sleep(0.02)
+        time.sleep(0.02)
 
-#         r += 1
+        r += 1
 
-#     except KeyboardInterrupt:
-#         pass
+    except KeyboardInterrupt:
+        pass
 
-#     print("\ntidying up")
+    print("\ntidying up")
 
-#     for s in S:
-#       s.cancel()
+    for s in S:
+      s.cancel()
 
-#     pi.stop()
+    pi.stop()
