@@ -12,7 +12,6 @@
 
 import time
 import pigpio # http://abyz.co.uk/rpi/pigpio/python.html
-import time
 
 SOS=340.29
 
@@ -119,6 +118,24 @@ if __name__ == "__main__":
     # cleanup()
     test()
 
+
+def test2():
+    
+    setup()
+
+    end = time.time() + 30.0
+    r = 1
+
+    while time.time() < end:
+
+        print "Reading %d" % r
+        readings = read_proximity_sensors()
+        print readings
+
+        time.sleep(0.02)
+        r += 1
+
+    cleanup()
 
 def test():
    import time
