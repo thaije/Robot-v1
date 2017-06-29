@@ -26,7 +26,7 @@ class Robot:
         #self.estimated_pose.scalar_update( 0, 0, 0 )
 
         # setup wheels
-        self.wheel_radius = 45
+        self.wheel_radius = 4.5
         self.wheel_base_length = -1
         self.leftWheel = Motor(23, 25, 24, diameter=9.0) 
         self.rightWheel = Motor(11, 10, 9, diameter=9.0) 

@@ -69,7 +69,7 @@ def checkEncoders(seconds):
 
       dcMotorControl.cleanup([motor1, motor2])
    except:
-      dcMotorControl.cleanup([motor1, motor2])
+      #dcMotorControl.cleanup([motor1, motor2])
 
 
 
