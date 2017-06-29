@@ -54,98 +54,55 @@ class Servo:
     def stop(self):
         wiringpi.pwmWrite(self.pin, 0)
 
-#######################################
-# General methods / methods to move the servos
-#######################################
 
 
-# # limit a value to a min and max
-# def clamp(n, minN, maxN):
-#     return max(min(maxN, n), minN)
+#############################################################
+# General functions
+#############################################################
+
+def initialize_default_servos():
+    print "Initializing default servos"
+    verticalServo = Servo(pin=18, minPos=55, maxPos=120, centerPosition=62)
+    horizontalServo = Servo(pin=13, minPos=30, maxPos=115, centerPosition=72)
+
+    return [verticalServo, horizontalServo]
 
 
-# stop servos
-def servoCleanup():
-    verticalServo.center()
-    horizontalServo.center()
+def cleanup_servos(servos):
+    print "Cleaning up servos"
+    for servo in servos:
+        servo.center()
 
-    # wait for the servo to center
-    time.sleep(1)
+        # wait for the servo to center
+        time.sleep(1)
 
-    verticalServo.stop()
-    horizontalServo.stop()
+        for servo in servos:
+            servo.stop()
 
 
-def test():
-    print "Starting PWM"
+# test with externally initialized servos and no cleanup
+def test_servos_external(servos):
+    print "Testing Servos"
     dtMin, dtMax = 30, 120
     dt = dtMin
     while True:
         try:
             print dt
-            verticalServo.setPosition(dt)
-            horizontalServo.setPosition(dt)
+            servos[0].setPosition(dt)
+            servos[1].setPosition(dt)
             dt += 10
             if dt > dtMax:
                 dt = dtMin
             time.sleep(1)
         except:
-            verticalServo.stop()
-            horizontalServo.stop()
+            servos[0].stop()
+            servos[1].stop()
             print "Exiting."
             break
 
 
-# # Initialize the servos with the pin number, min position and max position
-# # (to prevent the servos from breaking themselves due to limited space)
-# # Vertical servo, 55 is down, 120 is up
-# verticalServo = Servo(pin=18, minPos=55, maxPos=120, centerPosition=62)
-# print "Servo 1 online"
-
-# # horizontal servo, 30 is left
-# horizontalServo = Servo(pin=13, minPos=30, maxPos=115, centerPosition=72)
-# print "Servo 2 online"
-
-
-#servo2.setPosition(120)
-
-# run a test
-#test()
-#servoCleanup()
-
-def test2():
-    print "Starting PWM"
-
-    wiringpi.wiringPiSetupGpio()
-
-    wiringpi.pinMode(18, 2)
-    wiringpi.pwmSetMode(0)
-    wiringpi.pwmSetClock(400)
-    wiringpi.pwmSetRange(1024)
-    wiringpi.pwmWrite(18, 0)
-
-    wiringpi.pinMode(13, 2)
-    wiringpi.pwmSetMode(0)
-    wiringpi.pwmSetClock(400)
-    wiringpi.pwmSetRange(1024)
-    wiringpi.pwmWrite(13, 0)
-
-    dtMin, dtMax = 60, 120
-    dt = 72
-    while True:
-        try:
-            print dt
-            wiringpi.pwmWrite(18, dt)
-            wiringpi.pwmWrite(13, dt)
-            dt += 10
-            if dt > dtMax:
-                dt = dtMin
-                time.sleep(1)
-        except:
-            wiringpi.pwmWrite(18, 0)
-            wiringpi.pwmWrite(13, 0)
-            print "Exiting."
-            break
-
-
-#test2()
+# test without having to set anything up
+def test_servos_allin:
+    servos = initialize_default_servos()
+    test_servos_external(servos)
+    cleanup_servos(servos)

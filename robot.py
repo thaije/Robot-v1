@@ -5,15 +5,16 @@
 # sudo pigpiod
 # sudo python robot.py
 
+import time
+import pigpio
 import RPi.GPIO as GPIO
-GPIO.cleanup()
+
 
 from handy_stuff.functions.functions import * 
-from motors.servos.servoWirPWM import Servo 
-from motors.wheels.sn75SoftwarePwm import Motor
-from motors.wheels.pigpio_encoder import decoder
-from motors.wheels.pigpio_encoder_functions import *
-from proximity_sensors.sonar.srte import sonar
+import motors.servos.servoWirPWM as servo_controller 
+import motors.wheels.sn75SoftwarePwm as wheels_controller
+import motors.wheels.pigpio_encoder as wheel_encoder_controller
+import proximity_sensors.sonar.srte as sonar_controller
 
 
 
@@ -28,16 +29,16 @@ class Robot:
         # setup wheels
         self.wheel_radius = 4.5
         self.wheel_base_length = -1
-        self.leftWheel = Motor(23, 25, 24, diameter=9.0) 
-        self.rightWheel = Motor(11, 10, 9, diameter=9.0) 
-        self.wheels = [self.leftWheel, self.rightWheel]
+        self.wheels = wheelsController.initialize_default_motors()
+        self.leftWheel = self.wheels[0]
+        self.rightWheel = self.wheels[1]
 
         # setup servos
         # Vertical servo, 55 is down, 120 is up
         # horizontal servo, 30 is left
-        self.verticalServo = Servo(pin=18, minPos=55, maxPos=120, centerPosition=62)
-        self.horizontalServo = Servo(pin=13, minPos=30, maxPos=115, centerPosition=72)
-        self.servos = [self.verticalServo, self.horizontalServo]
+        self.servos = servoController.initialize_default_servos()
+        self.verticalServo = self.servos[0]
+        self.horizontalServo = self.servos[1]
         
         # Turn servos of during debugging to save battery
         self.verticalServo.stop()
@@ -50,9 +51,7 @@ class Robot:
         
         # Setup wheel encoders [left, right]
         self.wheel_encoder_ticks_per_revolution = 360
-        decoderLeft = decoder(self.pi, 14, 15, self.callback_encoder_leftwheel)
-        decoderRight = decoder(self.pi, 5, 6, self.callback_encoder_rightwheel)
-        self.decoders = [decoderLeft, decoderRight]
+        self.wheel_encoders = wheel_encoder_controller.initialize_default_encoders()
         self.wheels_ticks_left = 0
         self.wheels_ticks_right = 0
         self.prev_ticks_left = 0
@@ -60,95 +59,22 @@ class Robot:
 
         # setup sonars
         # [Head sonar, right sonar, left sonar]
-        self.sonars = []
+        self.sonars = sonar_controller.initialize_default_sonars(self.pi)
         self.proximity = [999.9, 999.9, 999.9]
-        # Head sonar
-        self.sonars.append(sonar(self.pi, None, 21))
-        # Front sonars
-        self.sonars.append(sonar(self.pi, None, 20))
-        self.sonars.append(sonar(self.pi,   26, 16))
 
 
-
-    def set_wheel_drive_rates( self, wheels, speeds):
-        if len(wheels) != len(speeds):
-            raise ValueError('Number of wheels and speeds is not equal')
-
-        for index, speed in enumerate(speeds):
-            # limit the speed to [-99, 99]
-            speed = functions.clamp(speed, -99, 99)
-
-            # set the speed of a wheel
-            if speed < 0:
-                wheels[i].backward(-speed)
-            elif speed > 0:
-                wheels[i].forward(speed)
-
-    # Transform a unicycle model to a differential drive model
-    def uni_to_diff( self, v, omega ):
-        # v = translational velocity (m/s)
-        # omega = angular velocity (rad/s)
-
-        R = self.wheel_radius
-        L = self.wheel_base_length
-
-        v_l = ( (2.0 * v) - (omega*L) ) / (2.0 * self.wheel_radius)
-        v_r = ( (2.0 * v) + (omega*L) ) / (2.0 * self.wheel_radius)
-
-        return v_l, v_r
-
-    def callback_encoder_leftwheel(self, way):
-        self.wheels_ticks_left += way
-
-
-    def callback_encoder_rightwheel(self, way):
-        self.wheels_ticks_right += way
-
-    # read the proximity sensors 
-    def read_proximity_sensors(self):
-        # trigger the sonar
-        for sonar in self.sonars:
-            sonar.trigger()
-
-        time.sleep(0.03)
-
-        # read the sonar results
-        for index, sonar in enumerate(self.sonars): 
-            self.proximity[index] = sonar.read()
-
-        return self.proximity
-
-    # stop turning of wheels
-    def stop_wheels(self, wheels):
-        for wheel in wheels:
-            wheel.stop()
-
-
-    # stop servos
-    def servo_cleanup(self, servos):
-        for servo in servos:
-            servos.center()
-
-        # wait for the servo to center
-        time.sleep(1)
-
-        for servo in servos:
-            servos.stop()
-
-    def decoder_cleanup(self, decoders):
-        for decoder in decoders:
-             decoder.cancel()
-
-    def sonar_cleanup(self, sonars):
-        for sonar in sonars:
-            sonar.cancel()
+    # Fetch the current tick count of the wheel encoders and save it in the robot object
+    def update_wheel_encoder_values(self):
+        self.wheels_ticks_left = wheel_encoder_controller.wheels_ticks_left
+        self.wheels_ticks_right = wheel_encoder_controller.wheels_ticks_right
 
     # stop and cleanup all motors and code
     def cleanup(self):
-        self.stop_wheels(self.wheels)
-        self.servo_cleanup(self.servos)
-        self.decoder_cleanup(self.decoders)
-        self.sonar_cleanup(self.sonars)
+        print "Cleaning up"
+        wheels_controller.stop_wheels(self.wheels)
+        servo_controller.cleanup_servos(self.servos)
+        wheel_encoder_controller.cleanup_wheel_encoders(self.wheel_encoders)
+        sonar_controller.cleanup_sonars(self.sonars)
         GPIO.cleanup()
         self.pi.stop()
 
@@ -190,42 +116,61 @@ class Robot:
 # Begin normal code
 ###########################################
 
-try:
-    Fedya = Robot()
-except:
-    GPIO.cleanup()
+
+print "Setting up robot"
+Fedya = Robot()
+
+# Execute some tests
+sonar_controller.test_sonars_external(Fedya.sonars)
+
+servo_controller.test_servos_external(Fedya.servos)
+
+wheels_controller.test_wheels_external(Fedya.wheels)
+
+
+Fedya.update_wheel_encoder_values()
+print "Encoder values in robot.py: %d en %d" % (Fedya.wheels_ticks_left, Fedya.wheels_ticks_right)
+
+wheels_encoder_controller.test_encoders_external(Fedya.wheel_encoders)
+
+Fedya.update_wheel_encoder_values()
+print "Encoder values in robot.py: %d en %d" % (Fedya.wheels_ticks_left, Fedya.wheels_ticks_right)
+
 
 # get sonar readings
-proximity = Fedya.read_proximity_sensors()
+# proximity = sonar_controller.read_proximity_sensors(Fedya.sonars)
 
 # get wheel encoder ticks
-Fedya.wheels_ticks_left
-Fedya.wheels_ticks_right
+#Fedya.wheels_ticks_left
+#Fedya.wheels_ticks_right
 
 # set wheel speed
-#Fedya.set_wheel_drive_rates( Fedya.wheels, [v_l, v_r] )
+#wheels_controller.set_wheel_drive_rates( Fedya.wheels, [80, 80] )
+#time.sleep(2.0)
+#wheels_controller.stop_wheels( Fedya.wheels )
+
+#print "Left: %d Right: %d" % (Fedya.wheels_ticks_left, Fedya.wheels_ticks_right)
 
 # get servo positions
-Fedya.verticalServo.position 
-Fedya.verticalServo.minPos
-Fedya.verticalServo.centerPosition
-Fedya.verticalServo.maxPos
-Fedya.horizontalServo.position 
-Fedya.horizontalServo.minPos
-Fedya.horizontalServo.centerPosition
-Fedya.horizontalServo.maxPos
+#Fedya.verticalServo.position 
+#Fedya.verticalServo.minPos
+#Fedya.verticalServo.centerPosition
+#Fedya.verticalServo.maxPos
+#Fedya.horizontalServo.position 
+#Fedya.horizontalServo.minPos
+#Fedya.horizontalServo.centerPosition
+#Fedya.horizontalServo.maxPos
 
 # set servo position
 #Fedya.verticalServo.setPosition(dt)
 #Fedya.horizontalServo.setPosition(dt)
 
 # send commands to wheels
-v = 0.5
-omega = 0.1
+# v = 0.5
+# omega = 0.1
 
 #v_l, v_r = Fedya.uni_to_diff( v, omega )
 #Fedya.set_wheel_drive_rates( Fedya.wheels, [v_l, v_r] )
 
 
 Fedya.cleanup()
-

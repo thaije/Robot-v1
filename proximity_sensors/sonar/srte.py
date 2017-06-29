@@ -67,130 +67,67 @@ class sonar:
       self._cb.cancel()
 
 
-S = []
-pi = None
 
-def setupSonar():
-    global pi
-    pi = pigpio.pi()
+#####################################################
+# General functions
+#####################################################
 
-    if not pi.connected:
-      exit()
 
-    global S
+def initialize_default_sonars(pi):
+    print "Initializng default sonars"
+    sonars = []
+
     # Head sonar
-    S.append(sonar(pi, None, 21))
+    sonars.append(sonar(pi, None, 21))
     # Front sonars
-    S.append(sonar(pi, None, 20))
-    S.append(sonar(pi,   26, 16))
+    sonars.append(sonar(pi, None, 20))
+    sonars.append(sonar(pi,   26, 16))
+
+    return sonars
 
 
-def cleanupSonar():
-    global pi
-    global S
+# read the proximity sensors 
+def read_proximity_sensors(sonars):
+    print "Read sonars"
 
-    for s in S:
-        s.cancel()
+    # trigger the sonars
+    for sonar in sonars:
+        sonar.trigger()
 
-    pi.stop()
+    time.sleep(0.03)
 
-
-# read the proximity sensors
-def read_proximity_sensors():
-    global S
-
-    # [Head sonar, right sonar, left sonar]
-    proximity = []
-
-    try:
-        # trigger the sonar
-        for s in S:
-            s.trigger()
-
-        time.sleep(0.03)
-
-        # read the sonar results
-        for s in S:	
-            proximity.append(s.read())
-
-    except KeyboardInterrupt:
-        pass
+    # read the sonar results
+    for index, sonar in enumerate(sonars): 
+        proximity[index] = sonar.read()
 
     return proximity
 
 
+def cleanup_sonars(sonars):
+    print "Cleaning up sonars"
+    for sonar in sonars:
+        sonar.cancel()
 
-def test2():
-    
+
+# test with externally initialized sonars and no cleanup
+def test_sonars_external(sonars):
+    print "Testing sonars"
     end = time.time() + 30.0
     r = 1
 
     while time.time() < end:
-
         print "Reading %d" % r
-        readings = read_proximity_sensors()
+        readings = read_proximity_sensors(sonars)
         print readings
 
         time.sleep(0.02)
         r += 1
 
-    cleanupSonar()
 
-
-def test():
-    import time
-    import pigpio
-    import srte
-
+# test without having to set anything up
+def test_sonars_allin():
     pi = pigpio.pi()
-
-    if not pi.connected:
-        exit()
-
-    S=[]
-    # Head sonar
-    S.append(srte.sonar(pi, None, 21))
-    # Front sonars
-    S.append(srte.sonar(pi, None, 20))
-    S.append(srte.sonar(pi,   26, 16))
-
-    end = time.time() + 30.0
-
-    r = 1
-
-    try:
-        while time.time() < end:
-
-            for s in S:
-                s.trigger()
-
-            time.sleep(0.03)
-	
-            i = 1
-            for s in S:	
-                print("Sensor {} {} {:.1f}".format(i, r, s.read()))
-                i += 1;
-
-            time.sleep(0.02)
-
-            r += 1
-
-    except KeyboardInterrupt:
-        pass
-
-    print("\ntidying up")
-
-    for s in S:
-      s.cancel()
-
+    sonars = initialize_default_sonars(pi)
+    test_sonars_external(sonars)
+    cleanup_sonars(sonars)
     pi.stop()
-
-
-
-if __name__ == "__main__":
-
-    #test2()
-    #test()
-
-    setupSonar()
-

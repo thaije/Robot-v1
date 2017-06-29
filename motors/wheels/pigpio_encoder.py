@@ -107,30 +107,64 @@ class decoder:
         self.cbA.cancel()
         self.cbB.cancel()
 
-# if __name__ == "__main__":
 
-#    import time
-#    import pigpio
 
-#    import rotary_encoder
+##################################################################
+# General functions
+##################################################################
 
-#    pos = 0
+wheels_ticks_left = 0
+wheels_ticks_right = 0
 
-#    def callback(way):
+def initialize_default_encoders(pi):
+    print "Initializing default encoders"
+    decoderLeft = decoder(pi, 14, 15, callback_encoder_leftwheel)
+    decoderRight = decoder(pi, 5, 6, callback_encoder_rightwheel)
 
-#       global pos
+    return [decoderLeft, decoderRight]
 
-#       pos += way
 
-#       print("pos={}".format(pos))
+def cleanup_wheel_encoders(encoders):
+    print "Cleaning up wheel encoders"
+    for decoder in decoders:
+        decoder.cancel()
 
-#    pi = pigpio.pi()
 
-#    decoder = rotary_encoder.decoder(pi, 7, 8, callback)
+def callback_encoder_leftwheel(way):
+    global wheels_ticks_left
+    wheels_ticks_left += way
 
-#    time.sleep(300)
 
-#    decoder.cancel()
+def callback_encoder_rightwheel(way):
+    global wheels_ticks_right
+    wheels_ticks_right += way
 
-#    pi.stop()
 
+# test with externally initialized servos and no cleanup
+def test_encoders_external(pi, encoders):
+    import sn75SoftwarePwm as wheel_controller
+    
+    print "Testing encoders"
+
+    # reset wheel encoder ticks
+    global wheels_ticks_left
+    global wheels_ticks_right
+    wheels_ticks_left = 0
+    wheels_ticks_right = 0
+
+    # test / run motors
+    wheel_controller.test_wheels_allin()
+
+    # print encoder ticks
+    print "Left wheel encoder ticks:", wheels_ticks_left
+    print "Right wheel encoder ticks:", wheels_ticks_right
+
+
+# test without having to set anything up
+def test_encoders_allin():
+    pi = pigpio.pi()
+    encoders = initialize_default_encoders(pi)
+
+    test_encoders_external(pi, encoders)
+    cleanup_wheel_encoders(encoders)
+    pi.stop()

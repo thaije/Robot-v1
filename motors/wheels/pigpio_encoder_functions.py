@@ -1,8 +1,10 @@
 # Uses decoder class to keep track of the movement 
 # of the wheels
 
+import sys
 import time
 import pigpio
+import RPi.GPIO as GPIO
 
 import pigpio_encoder
 import sn75SoftwarePwm as dcMotorControl
@@ -73,6 +75,7 @@ def checkEncoders(seconds):
 
 
 
+
 def encoderTest():
    # setup the encoders when the script is imported
    pi = pigpio.pi()
@@ -86,5 +89,6 @@ def encoderTest():
    decoderLeft.cancel()
    decoderRight.cancel()
    pi.stop()
+   GPIO.cleanup()
 
-#encoderTest()
+encoderTest()

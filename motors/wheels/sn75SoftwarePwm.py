@@ -18,14 +18,13 @@ GPIO.setmode(GPIO.BCM)
 
 class Motor:
 
-    def __init__(self, pinForward, pinBackward, pinControl, diameter):
+    def __init__(self, pinForward, pinBackward, pinControl):
         """ Initialize the motor with its control pins and start pulse-width
              modulation """
 
         self.pinForward = pinForward
         self.pinBackward = pinBackward
         self.pinControl = pinControl
-        self.diameter = diameter
         GPIO.setup(self.pinForward, GPIO.OUT)
         GPIO.setup(self.pinBackward, GPIO.OUT)
         GPIO.setup(self.pinControl, GPIO.OUT)
@@ -57,99 +56,95 @@ class Motor:
 
 
 
-#######################################
-# Methods to move the wheels
-#######################################
+#########################################################
+# General functions
+#########################################################
 
-# Move in a direction forward/backward
-# s = speed [-99, 99], minus = backward
-def move(s):
-    s = clamp(s, -99, 99)
-    if s < 0:
-        motor1.backward(-s)
-        motor2.backward(-s)
-    elif s > 0:
-        motor1.forward(s)
-        motor2.forward(s)
+def set_wheel_drive_rates( wheels, speeds):
+    if len(wheels) != len(speeds):
+        raise ValueError('Number of wheels and speeds is not equal')
 
+    for index, speed in enumerate(speeds):
+        # limit the speed to [-99, 99]
+        speed = clamp(speed, -99, 99)
 
-# Set the speed of both wheels, value between [-99, 99]
-def set_wheel_drive_rates( motors, v_l, v_r):
-    motor1 = motors[0]
-    motor2 = motors[1]
-    
-    v_l = clamp(v_l, -99, 99)
-    v_r = clamp(v_r, -99, 99)
-
-    # set left wheel
-    if v_l < 0:
-        motor1.backward(-v_l)
-    else:
-        motor1.forward(v_l)
-
-    # set right wheel
-    if v_r < 0:
-        motor2.backward(-v_r)
-    else:
-        motor2.forward(v_r)
+        # set the speed of a wheel
+        if speed < 0:
+            wheels[index].backward(-speed)
+        elif speed > 0:
+            wheels[index].forward(speed)
 
 
 
-# stop turning of motors
-def stop():
-    motor2.stop()
-    motor1.stop()
+# Transform a unicycle model to a differential drive model
+def uni_to_diff( self, v, omega ):
+    # v = translational velocity (m/s)
+    # omega = angular velocity (rad/s)
 
-# turn the robot
-# s = speed / direction [-99,99]
-# s < 0 = turn left, s > 0 = turn right
-def turn(s):
-    s = clamp(s, -99, 99)
+    R = self.wheel_radius
+    L = self.wheel_base_length
 
-    # turn left
-    if s < 0:
-        motor1.backward(s)
-        motor2.forward(s)
-    # turn right
-    elif s > 0:
-        motor1.forward(s)
-        motor2.backward(s)
+    v_l = ( (2.0 * v) - (omega*L) ) / (2.0 * self.wheel_radius)
+    v_r = ( (2.0 * v) + (omega*L) ) / (2.0 * self.wheel_radius)
+
+    return v_l, v_r
+
+
+# stop turning of wheels
+def stop_wheels(self, wheels):
+    for wheel in wheels:
+        wheel.stop()
+
 
 # Limit a value to a min and max
 def clamp(n, minN, maxN):
     return max(min(maxN, n), minN)
 
 
-def cleanup(motors):
-    for motor in motors:
-        motor.stop()
+def cleanup_motors(motors):
+    print "Cleaning up motors"
+    stop_wheels(motors)
     GPIO.cleanup()
 
 
-# Test the motors
-def test():
+def initialize_default_motors():
+    print "Initializing motors with default settings"
+    left_motor = Motor(23, 25, 24, 9.0) 
+    right_motor = Motor(11, 10, 9, 9.0)
+
+    return [left_motor, right_motor]
+
+
+# test with externally initialized motors and no cleanup
+def test_wheels_external(motors):
     try:
-        motor1.forward(100)
-        sleep(5)
-        motor1.backward(120)
-        sleep(5)
-        motor1.stop()
-        cleanup()
+        print "testing first motor"
+        motors[0].forward(100)
+        sleep(2)
+        motors[0].backward(120)
+        sleep(1)
+        motors[0].stop()
+
+        print "testing second motor"
+        motors[1].forward(100)
+        sleep(2)
+        motors[1].backward(120)
+        sleep(1)
+        motors[1].stop()
     except:
-        cleanup()
-        print "Exiting."
+        print "Error during testing of motors."
+    finally:
+        stop_wheels(motors)
+
+
+# test without having to set anything up
+def test_wheel_allin():
+    motors = initialize_default_motors()
+    test_wheels_external(motors)
+    cleanup_motors(motors)
 
 
 
-# initiliase motors
-# motor1 = sn75 right side
-# motor2 = sn75 left side
 
-# # motor1 = Motor(16, 22, 18) # Board pins
-# motor1 = Motor(23, 25, 24, 9.0) # BCM
-# print "DC motor 1 online"
-# # motor2 = Motor(23, 19, 21) # Board pins
-# motor2 = Motor(11, 10, 9, 9.0) # BCM
-# print "DC motor 2 online"
-# test()
+
 
