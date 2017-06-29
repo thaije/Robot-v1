@@ -44,7 +44,7 @@ def cleanupEncoders():
 def checkEncoders(seconds):
    
    try:  
-      dcMotorControl.set_wheel_drive_rates(0, 50)
+      dcMotorControl.set_wheel_drive_rates(70, 70)
       timed = 0
       while(timed < seconds):
          time.sleep(0.1)
@@ -67,7 +67,7 @@ def checkEncoders(seconds):
 pi = pigpio.pi()
 
 decoderLeft = pigpio_encoder.decoder(pi, 14, 15, callbackLeft)
-decoderRight = pigpio_encoder.decoder(pi, 5, 6, callbackRight)
+decoderRight = pigpio_encoder.decoder(pi, 6, 5, callbackRight)
 
 
 print "Starting motors"
