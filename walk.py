@@ -5,13 +5,10 @@ import random
 print "Initializing motors"
 import 
 
-import utilities.functions as functions
 import motors.sn75SoftwarePwm as dcMotorControl
 from motors.servoWirPWM import *
 from ultrasonic_sensor.ussContinuous import *
 from motors.pigpio_encoder_functions import *
-
-
 
 
 # generate and send the correct commands to the robot

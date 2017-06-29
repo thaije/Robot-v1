@@ -1,0 +1,48 @@
+from time import sleep
+import sys
+import random
+
+
+
+
+servoWirPWM:
+	imports:
+		import wiringpi2 as wiringpi
+		import time
+	setup
+		wiringpi.wiringPiSetupGpio()
+	cleanup
+		servoCleanup()
+
+pigpio_encoder
+	imports:
+		import pigpio
+
+pigpio_encoder_functions
+	imports: 
+		import time
+		import pigpio_encoder
+		import sn75SoftwarePwm as dcMotorControl
+	setup:
+		pi = pigpio.pi()
+	cleanup:	
+		cleanupEncoders()
+
+sn75SoftwarePwm
+	imports: 
+		import RPi.GPIO as GPIO
+		from time import sleep
+	setup:
+		GPIO.setmode(GPIO.BCM)
+	cleanup:
+		cleanup()
+
+srte
+	imports:
+		import time
+		import pigpio
+	setup:
+		pi = pigpio.pi()
+		setup()
+	cleanup:
+		cleanup()

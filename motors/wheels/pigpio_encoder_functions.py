@@ -12,7 +12,7 @@ import sn75SoftwarePwm as dcMotorControl
 
 leftEncoderTicks = 0
 rightEncoderTicks = 0
-
+pi = None
 
 # update left wheel encoder ticks
 def callbackLeftWheel(way):
@@ -66,7 +66,7 @@ def checkEncoders(seconds):
       dcMotorControl.cleanup()
 
 
-def test():
+def encoderTest():
    print "Starting motors"
    checkEncoders(0.88)
 
@@ -80,4 +80,4 @@ decoderLeft = pigpio_encoder.decoder(pi, 14, 15, callbackLeftWheel)
 decoderRight = pigpio_encoder.decoder(pi, 5, 6, callbackRightWheel)
 
 
-#test()
+#encoderTest()

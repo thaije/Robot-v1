@@ -69,7 +69,7 @@ class sonar:
 S = []
 pi = None
 
-def setup():
+def setupSonar():
     global pi
     pi = pigpio.pi()
 
@@ -84,7 +84,7 @@ def setup():
     S.append(sonar(pi,   26, 16))
 
 
-def cleanup():
+def cleanupSonar():
     global pi
     global S
 
@@ -121,8 +121,6 @@ def read_proximity_sensors():
 
 def test2():
     
-    setup()
-
     end = time.time() + 30.0
     r = 1
 
@@ -135,7 +133,7 @@ def test2():
         time.sleep(0.02)
         r += 1
 
-    cleanup()
+    cleanupSonar()
 
 
 def test():
@@ -193,4 +191,5 @@ if __name__ == "__main__":
     #test2()
     #test()
 
-    setup()
+    setupSonar()
+
