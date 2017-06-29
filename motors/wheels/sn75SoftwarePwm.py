@@ -10,6 +10,8 @@
 
 import RPi.GPIO as GPIO
 from time import sleep
+from handy_stuff.functions.functions import * 
+
 
 GPIO.setmode(GPIO.BCM)
 

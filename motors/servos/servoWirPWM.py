@@ -1,6 +1,6 @@
 import wiringpi2 as wiringpi
 import time
-
+from handy_stuff.functions.functions import * 
 
 wiringpi.wiringPiSetupGpio()
 

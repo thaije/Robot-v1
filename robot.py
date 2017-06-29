@@ -6,7 +6,7 @@
 # sudo python robot.py
 
 
-import handy_stuff.functions.functions as functions
+from handy_stuff.functions.functions import * 
 from motors.servos.servoWirPWM import Servo 
 from motors.wheels.sn75SoftwarePwm import Motor
 from motors.wheels.pigpio_encoder import decoder
