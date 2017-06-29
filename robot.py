@@ -6,7 +6,7 @@
 # sudo python robot.py
 
 
-from handy_stuff.functions.functions import *
+import handy_stuff.functions.functions as functions
 from motors.servos.servoWirPWM import Servo 
 from motors.wheels.sn75SoftwarePwm import Motor
 from motors.wheels.pigpio_encoder import decoder
@@ -20,8 +20,8 @@ class Robot:
     
     def __init__(self):
 
-        self.estimated_pose = None
-        self.estimated_pose.scalar_update( 0, 0, 0 )
+        #self.estimated_pose = None
+        #self.estimated_pose.scalar_update( 0, 0, 0 )
 
         # setup wheels
         self.wheel_radius = 45
@@ -70,7 +70,7 @@ class Robot:
 
         for index, speed in enumerate(speeds):
             # limit the speed to [-99, 99]
-            speed = clamp(speed, -99, 99)
+            speed = functions.clamp(speed, -99, 99)
 
             # set the speed of a wheel
             if speed < 0:
@@ -184,36 +184,37 @@ class Robot:
 # Begin normal code
 ###########################################
 
-    Fedya = robot()
 
-    # get sonar readings
-    proximity = Fedya.read_proximity_sensors()
+Fedya = Robot()
 
-    # get wheel encoder ticks
-    Fedya.wheelTicks
+# get sonar readings
+proximity = Fedya.read_proximity_sensors()
 
-    # set wheel speed
-    #Fedya.set_wheel_drive_rates( Fedya.wheels, [v_l, v_r] )
+# get wheel encoder ticks
+Fedya.wheelTicks
 
-    # get servo positions
-    Fedya.verticalServo.position 
-    Fedya.verticalServo.minPos
-    Fedya.verticalServo.centerPosition
-    Fedya.verticalServo.maxPos
-    Fedya.horizontalServo.position 
-    Fedya.horizontalServo.minPos
-    Fedya.horizontalServo.centerPosition
-    Fedya.horizontalServo.maxPos
+# set wheel speed
+#Fedya.set_wheel_drive_rates( Fedya.wheels, [v_l, v_r] )
 
-    # set servo position
-    Fedya.verticalServo.setPosition(dt)
-    Fedya.horizontalServo.setPosition(dt)
+# get servo positions
+Fedya.verticalServo.position 
+Fedya.verticalServo.minPos
+Fedya.verticalServo.centerPosition
+Fedya.verticalServo.maxPos
+Fedya.horizontalServo.position 
+Fedya.horizontalServo.minPos
+Fedya.horizontalServo.centerPosition
+Fedya.horizontalServo.maxPos
 
-    # send commands to wheels
-    v = 0.5
-    omega = 0.1
+# set servo position
+Fedya.verticalServo.setPosition(dt)
+Fedya.horizontalServo.setPosition(dt)
 
-    v_l, v_r = Fedya.uni_to_diff( v, omega )
-    Fedya.set_wheel_drive_rates( Fedya.wheels, [v_l, v_r] )
+# send commands to wheels
+v = 0.5
+omega = 0.1
+
+v_l, v_r = Fedya.uni_to_diff( v, omega )
+Fedya.set_wheel_drive_rates( Fedya.wheels, [v_l, v_r] )
 
 
