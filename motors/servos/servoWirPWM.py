@@ -102,7 +102,7 @@ def test_servos_external(servos):
 
 
 # test without having to set anything up
-def test_servos_allin:
+def test_servos_allin():
     servos = initialize_default_servos()
     test_servos_external(servos)
     cleanup_servos(servos)

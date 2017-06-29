@@ -74,7 +74,7 @@ class sonar:
 
 
 def initialize_default_sonars(pi):
-    print "Initializng default sonars"
+    print "Initializing default sonars"
     sonars = []
 
     # Head sonar
@@ -97,8 +97,9 @@ def read_proximity_sensors(sonars):
     time.sleep(0.03)
 
     # read the sonar results
-    for index, sonar in enumerate(sonars): 
-        proximity[index] = sonar.read()
+    proximity = []
+    for sonar in sonars: 
+        proximity.append(sonar.read())
 
     return proximity
 
@@ -111,8 +112,8 @@ def cleanup_sonars(sonars):
 
 # test with externally initialized sonars and no cleanup
 def test_sonars_external(sonars):
-    print "Testing sonars"
-    end = time.time() + 30.0
+    print "Testing sonars for 5s"
+    end = time.time() + 5.0
     r = 1
 
     while time.time() < end:
