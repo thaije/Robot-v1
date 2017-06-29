@@ -5,6 +5,8 @@
 # sudo pigpiod
 # sudo python robot.py
 
+import RPi.GPIO as GPIO
+GPIO.cleanup()
 
 from handy_stuff.functions.functions import * 
 from motors.servos.servoWirPWM import Servo 
@@ -36,16 +38,20 @@ class Robot:
         self.verticalServo = Servo(pin=18, minPos=55, maxPos=120, centerPosition=62)
         self.horizontalServo = Servo(pin=13, minPos=30, maxPos=115, centerPosition=72)
         self.servos = [self.verticalServo, self.horizontalServo]
+        
+        # Turn servos of during debugging to save battery
+        self.verticalServo.stop()
+        self.horizontalServo.stop()        
 
         # start pigpio
-        pi = pigpio.pi()
-        if not pi.connected:
+        self.pi = pigpio.pi()
+        if not self.pi.connected:
             exit()
         
         # Setup wheel encoders [left, right]
         self.wheel_encoder_ticks_per_revolution = 360
-        decoderLeft = decoder(pi, 14, 15, callback_encoder_leftwheel)
-        decoderRight = decoder(pi, 5, 6, callback_encoder_rightwheel)
+        decoderLeft = decoder(self.pi, 14, 15, self.callback_encoder_leftwheel)
+        decoderRight = decoder(self.pi, 5, 6, self.callback_encoder_rightwheel)
         self.decoders = [decoderLeft, decoderRight]
         self.wheels_ticks_left = 0
         self.wheels_ticks_right = 0
@@ -55,12 +61,12 @@ class Robot:
         # setup sonars
         # [Head sonar, right sonar, left sonar]
         self.sonars = []
-        self.proximity = []
+        self.proximity = [999.9, 999.9, 999.9]
         # Head sonar
-        sonars.append(sonar(pi, None, 21))
+        self.sonars.append(sonar(self.pi, None, 21))
         # Front sonars
-        sonars.append(sonar(pi, None, 20))
-        sonars.append(sonar(pi,   26, 16))
+        self.sonars.append(sonar(self.pi, None, 20))
+        self.sonars.append(sonar(self.pi,   26, 16))
 
 
 
@@ -144,7 +150,7 @@ class Robot:
         self.decoder_cleanup(self.decoders)
         self.sonar_cleanup(self.sonars)
         GPIO.cleanup()
-        pi.stop()
+        self.pi.stop()
 
 
     # update the estimated position of the robot using it's wheel encoder readings
@@ -191,7 +197,8 @@ Fedya = Robot()
 proximity = Fedya.read_proximity_sensors()
 
 # get wheel encoder ticks
-Fedya.wheelTicks
+Fedya.wheels_ticks_left
+Fedya.wheels_ticks_right
 
 # set wheel speed
 #Fedya.set_wheel_drive_rates( Fedya.wheels, [v_l, v_r] )
@@ -207,14 +214,14 @@ Fedya.horizontalServo.centerPosition
 Fedya.horizontalServo.maxPos
 
 # set servo position
-Fedya.verticalServo.setPosition(dt)
-Fedya.horizontalServo.setPosition(dt)
+#Fedya.verticalServo.setPosition(dt)
+#Fedya.horizontalServo.setPosition(dt)
 
 # send commands to wheels
 v = 0.5
 omega = 0.1
 
-v_l, v_r = Fedya.uni_to_diff( v, omega )
-Fedya.set_wheel_drive_rates( Fedya.wheels, [v_l, v_r] )
+#v_l, v_r = Fedya.uni_to_diff( v, omega )
+#Fedya.set_wheel_drive_rates( Fedya.wheels, [v_l, v_r] )
 
 
