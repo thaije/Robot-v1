@@ -59,9 +59,9 @@ class Servo:
 #######################################
 
 
-# limit a value to a min and max
-def clamp(n, minN, maxN):
-    return max(min(maxN, n), minN)
+# # limit a value to a min and max
+# def clamp(n, minN, maxN):
+#     return max(min(maxN, n), minN)
 
 
 # stop servos
@@ -95,15 +95,16 @@ def test():
             print "Exiting."
             break
 
-# Initialize the servos with the pin number, min position and max position
-# (to prevent the servos from breaking themselves due to limited space)
-# Vertical servo, 55 is down, 120 is up
-verticalServo = Servo(pin=18, minPos=55, maxPos=120, centerPosition=62)
-print "Servo 1 online"
 
-# horizontal servo, 30 is left
-horizontalServo = Servo(pin=13, minPos=30, maxPos=115, centerPosition=72)
-print "Servo 2 online"
+# # Initialize the servos with the pin number, min position and max position
+# # (to prevent the servos from breaking themselves due to limited space)
+# # Vertical servo, 55 is down, 120 is up
+# verticalServo = Servo(pin=18, minPos=55, maxPos=120, centerPosition=62)
+# print "Servo 1 online"
+
+# # horizontal servo, 30 is left
+# horizontalServo = Servo(pin=13, minPos=30, maxPos=115, centerPosition=72)
+# print "Servo 2 online"
 
 
 #servo2.setPosition(120)
