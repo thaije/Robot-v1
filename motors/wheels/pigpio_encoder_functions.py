@@ -47,7 +47,7 @@ def cleanupEncoders():
 def checkEncoders(seconds):
    
    try:  
-      dcMotorControl.set_wheel_drive_rates(0, 50)
+      dcMotorControl.set_wheel_drive_rates(70, 70)
       timed = 0
       while(timed < seconds):
          time.sleep(0.1)
@@ -64,6 +64,7 @@ def checkEncoders(seconds):
          timed += 0.1 
    except:
       dcMotorControl.cleanup()
+
 
 
 def encoderTest():
