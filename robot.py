@@ -193,6 +193,7 @@ class Robot:
 # Begin normal code
 ###########################################
 
+
 print "Setting up robot class"
 Fedya = Robot()
 
@@ -230,5 +231,6 @@ omega = 0.1
 
 #v_l, v_r = Fedya.uni_to_diff( v, omega )
 #Fedya.set_wheel_drive_rates( Fedya.wheels, [v_l, v_r] )
+
 
 Fedya.cleanup()

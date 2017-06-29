@@ -1,8 +1,10 @@
 # Uses decoder class to keep track of the movement 
 # of the wheels
 
+import sys
 import time
 import pigpio
+import RPi.GPIO as GPIO
 
 import pigpio_encoder
 import sn75SoftwarePwm as dcMotorControl
@@ -47,7 +49,11 @@ def cleanupEncoders():
 def checkEncoders(seconds):
    
    try:  
-      dcMotorControl.set_wheel_drive_rates(70, 70)
+      motor1 = Motor(23, 25, 24, 9.0) 
+      motor2 = Motor(11, 10, 9, 9.0) 
+      motors = [motor1, motor2]
+
+      dcMotorControl.set_wheel_drive_rates(motors, 70, 70)
       timed = 0
       while(timed < seconds):
          time.sleep(0.1)
@@ -62,23 +68,26 @@ def checkEncoders(seconds):
       while(timed < 1):
          time.sleep(0.1)
          timed += 0.1 
-   except:
-      dcMotorControl.cleanup()
 
+      dcMotorControl.cleanup([motor1, motor2])
+   except:
+#      dcMotorControl.cleanup([motor1, motor2])
+       print "error", sys.exc_info()[0]
 
 
 def encoderTest():
+   # setup the encoders when the script is imported
+   pi = pigpio.pi()
+
+   decoderLeft = pigpio_encoder.decoder(pi, 14, 15, callbackLeftWheel)
+   decoderRight = pigpio_encoder.decoder(pi, 5, 6, callbackRightWheel)
+
    print "Starting motors"
    checkEncoders(0.88)
 
-   cleanupEncoders()
+   decoderLeft.cancel()
+   decoderRight.cancel()
+   pi.stop()
+   GPIO.cleanup()
 
-
-# setup the encoders when the script is imported
-# pi = pigpio.pi()
-
-# decoderLeft = pigpio_encoder.decoder(pi, 14, 15, callbackLeftWheel)
-# decoderRight = pigpio_encoder.decoder(pi, 5, 6, callbackRightWheel)
-
-
-#encoderTest()
+encoderTest()

@@ -74,7 +74,10 @@ def move(s):
 
 
 # Set the speed of both wheels, value between [-99, 99]
-def set_wheel_drive_rates( v_l, v_r):
+def set_wheel_drive_rates( motors, v_l, v_r):
+    motor1 = motors[0]
+    motor2 = motors[1]
+    
     v_l = clamp(v_l, -99, 99)
     v_r = clamp(v_r, -99, 99)
 
@@ -117,8 +120,9 @@ def clamp(n, minN, maxN):
     return max(min(maxN, n), minN)
 
 
-def cleanup():
-    stop()
+def cleanup(motors):
+    for motor in motors:
+        motor.stop()
     GPIO.cleanup()
 
 
