@@ -75,7 +75,7 @@ class Robot:
             # set the speed of a wheel
             if speed < 0:
                 wheels[i].backward(-speed)
-            else if speed > 0:
+            elif speed > 0:
                 wheels[i].forward(speed)
 
     # Transform a unicycle model to a differential drive model
