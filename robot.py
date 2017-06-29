@@ -191,7 +191,7 @@ class Robot:
 	Fedya.wheelTicks
 
 	# set wheel speed
-	Fedya.set_wheel_drive_rates( Fedya.wheels, [v_l, v_r] )
+	#Fedya.set_wheel_drive_rates( Fedya.wheels, [v_l, v_r] )
 
 	# get servo positions
 	Fedya.verticalServo.position 
@@ -210,7 +210,7 @@ class Robot:
     # send commands to wheels
     v = 0.5
     omega = 0.1
-    
+
     v_l, v_r = Fedya.uni_to_diff( v, omega )
     Fedya.set_wheel_drive_rates( Fedya.wheels, [v_l, v_r] )
 
