@@ -54,7 +54,7 @@ def main():
 def checkEncoders(seconds):
 	
 	try:	
-		dcMotorControl.move(50)
+		dcMotorControl.turn(50)
 		timed = 0
 		while(timed < seconds):
 			print "Motor 1: %d, Motor 2: %d" % (motor1Ticks, motor2Ticks)
