@@ -112,7 +112,7 @@ def cleanup_sonars(sonars):
 # test with externally initialized sonars and no cleanup
 def test_sonars_external(sonars):
     print "Testing sonars"
-    end = time.time() + 30.0
+    end = time.time() + 5.0
     r = 1
 
     while time.time() < end:
