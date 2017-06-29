@@ -4,8 +4,8 @@
 # Low duty cycle is short pulses with short pauses inbetween (low aver. voltage)
 # High duty cycle is long pulses with long pauses inbetween (high aver. voltage)
 # Max duty cycle is 100
-# motor1 is right wheel
-# motor2 is left wheel
+# motor1 is left wheel
+# motor2 is right wheel
 
 
 import RPi.GPIO as GPIO
@@ -77,21 +77,20 @@ def set_wheel_drive_rates( v_l, v_r):
 
     # set left wheel
     if v_l < 0:
-        motor2.backward(-v_l)
+        motor1.backward(-v_l)
     else:
-        motor2.forward(v_l)
+        motor1.forward(v_l)
 
     # set right wheel
     if v_r < 0:
-        motor1.backward(-v_r)
+        motor2.backward(-v_r)
     else:
-        motor1.forward(v_r)
+        motor2.forward(v_r)
 
 
 
 # stop turning of motors
 def stop():
-#    motor1.stop()
 	motor2.stop()
 	motor1.stop()
 
@@ -101,12 +100,12 @@ def stop():
 def turn(s):
     s = clamp(s, -99, 99)
 
-    # turn right
-    if s > 0:
+    # turn left
+    if s < 0:
         motor1.backward(s)
         motor2.forward(s)
-    # turn left
-    elif s < 0:
+    # turn right
+    elif s > 0:
         motor1.forward(s)
         motor2.backward(s)
 
@@ -136,8 +135,8 @@ def test():
 
 
 # initiliase motors
-# motor1 = sne73 right side
-# motor2 = sne73 left side
+# motor1 = sn75 right side
+# motor2 = sn75 left side
 
 # motor1 = Motor(16, 22, 18) # Board pins
 motor1 = Motor(23, 25, 24) # BCM

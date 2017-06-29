@@ -8,16 +8,38 @@ import sn75SoftwarePwm as dcMotorControl
 # One rotation is 360 ticks
 # Forwards is positive, backwards is negative
 
-pos = 0
+leftEncoderTicks = 0
+rightEncoderTicks = 0
 
-def callback(way):
 
-   global pos
+# update left wheel encoder ticks
+def callbackLeft(way):
 
-   pos += way
+   global leftEncoderTicks
 
-   print("pos={}".format(pos))
+   leftEncoderTicks += way
+
+   print("left={}".format(leftEncoderTicks))
+
+# update right wheel encoder ticks
+def callbackRight(way)
+   global rightEncoderTicks
+
+   rightEncoderTicks += way
+
+   print("right={}".format(rightEncoderTicks))
    
+
+# stop the decoders
+def cleanupEncoders():
+   global decoderLeft
+   global decoderRight
+
+   decoderLeft.cancel()
+   decoderRight.cancel()
+
+   global pi
+   pi.stop()
 
 
 def checkEncoders(seconds):
@@ -42,11 +64,11 @@ def checkEncoders(seconds):
       dcMotorControl.cleanup()
 
 
-
+# setup the encoders when the script is imported
 pi = pigpio.pi()
 
-decoder = pigpio_encoder.decoder(pi, 14, 15, callback)
-#decoder = pigpio_encoder.decoder(pi, 5, 6, callback)
+decoderLeft = pigpio_encoder.decoder(pi, 14, 15, callbackLeft)
+decoderRight = pigpio_encoder.decoder(pi, 5, 6, callbackRight)
 
 
 print "Starting motors"
