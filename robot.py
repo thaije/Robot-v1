@@ -184,8 +184,10 @@ class Robot:
 # Begin normal code
 ###########################################
 
-
-Fedya = Robot()
+try:
+    Fedya = Robot()
+except:
+    GPIO.cleanup()
 
 # get sonar readings
 proximity = Fedya.read_proximity_sensors()
@@ -217,4 +219,6 @@ omega = 0.1
 v_l, v_r = Fedya.uni_to_diff( v, omega )
 Fedya.set_wheel_drive_rates( Fedya.wheels, [v_l, v_r] )
 
+
+Fedya.cleanup()
 
