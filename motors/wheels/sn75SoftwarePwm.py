@@ -92,8 +92,8 @@ def set_wheel_drive_rates( v_l, v_r):
 
 # stop turning of motors
 def stop():
-	motor2.stop()
-	motor1.stop()
+    motor2.stop()
+    motor1.stop()
 
 # turn the robot
 # s = speed / direction [-99,99]
