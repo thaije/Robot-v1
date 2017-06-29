@@ -1,3 +1,5 @@
+# Uses decoder class to keep track of the movement 
+# of the wheels
 
 import time
 import pigpio
@@ -13,7 +15,7 @@ rightEncoderTicks = 0
 
 
 # update left wheel encoder ticks
-def callbackLeft(way):
+def callbackLeftWheel(way):
    global leftEncoderTicks
 
    leftEncoderTicks += way
@@ -21,7 +23,7 @@ def callbackLeft(way):
    print("left={}".format(leftEncoderTicks))
 
 # update right wheel encoder ticks
-def callbackRight(way):
+def callbackRightWheel(way):
    global rightEncoderTicks
 
    rightEncoderTicks += way
@@ -31,6 +33,7 @@ def callbackRight(way):
 
 # stop the decoders
 def cleanupEncoders():
+   time.sleep(1)
    global decoderLeft
    global decoderRight
 
@@ -63,20 +66,18 @@ def checkEncoders(seconds):
       dcMotorControl.cleanup()
 
 
+def test():
+   print "Starting motors"
+   checkEncoders(0.88)
+
+   cleanupEncoders()
+
+
 # setup the encoders when the script is imported
 pi = pigpio.pi()
 
-decoderLeft = pigpio_encoder.decoder(pi, 14, 15, callbackLeft)
-decoderRight = pigpio_encoder.decoder(pi, 5, 6, callbackRight)
+decoderLeft = pigpio_encoder.decoder(pi, 14, 15, callbackLeftWheel)
+decoderRight = pigpio_encoder.decoder(pi, 5, 6, callbackRightWheel)
 
 
-print "Starting motors"
-checkEncoders(0.88)
-
-
-time.sleep(1)
-
-decoderLeft.cancel()
-decoderRight.cancel()
-
-pi.stop()
+#test()

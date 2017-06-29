@@ -1,4 +1,5 @@
-#!/usr/bin/env python
+# Class from Pigpio website to decode rotary encoder pulses
+# Url: http://abyz.co.uk/rpi/pigpio/examples.html#Python code
 
 import pigpio
 
@@ -106,30 +107,30 @@ class decoder:
       self.cbA.cancel()
       self.cbB.cancel()
 
-if __name__ == "__main__":
+# if __name__ == "__main__":
 
-   import time
-   import pigpio
+#    import time
+#    import pigpio
 
-   import rotary_encoder
+#    import rotary_encoder
 
-   pos = 0
+#    pos = 0
 
-   def callback(way):
+#    def callback(way):
 
-      global pos
+#       global pos
 
-      pos += way
+#       pos += way
 
-      print("pos={}".format(pos))
+#       print("pos={}".format(pos))
 
-   pi = pigpio.pi()
+#    pi = pigpio.pi()
 
-   decoder = rotary_encoder.decoder(pi, 7, 8, callback)
+#    decoder = rotary_encoder.decoder(pi, 7, 8, callback)
 
-   time.sleep(300)
+#    time.sleep(300)
 
-   decoder.cancel()
+#    decoder.cancel()
 
-   pi.stop()
+#    pi.stop()
 
