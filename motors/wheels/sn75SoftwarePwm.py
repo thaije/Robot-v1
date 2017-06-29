@@ -10,7 +10,7 @@
 
 import RPi.GPIO as GPIO
 from time import sleep
-from handy_stuff.functions.functions import * 
+#from handy_stuff.functions.functions import * 
 
 
 GPIO.setmode(GPIO.BCM)
@@ -142,10 +142,10 @@ def test():
 # motor2 = sn75 left side
 
 # # motor1 = Motor(16, 22, 18) # Board pins
-# motor1 = Motor(23, 25, 24) # BCM
+# motor1 = Motor(23, 25, 24, 9.0) # BCM
 # print "DC motor 1 online"
 # # motor2 = Motor(23, 19, 21) # Board pins
-# motor2 = Motor(11, 10, 9) # BCM
+# motor2 = Motor(11, 10, 9, 9.0) # BCM
 # print "DC motor 2 online"
-
+# test()
 
