@@ -74,10 +74,10 @@ def encoderTest():
 
 
 # setup the encoders when the script is imported
-pi = pigpio.pi()
+# pi = pigpio.pi()
 
-decoderLeft = pigpio_encoder.decoder(pi, 14, 15, callbackLeftWheel)
-decoderRight = pigpio_encoder.decoder(pi, 5, 6, callbackRightWheel)
+# decoderLeft = pigpio_encoder.decoder(pi, 14, 15, callbackLeftWheel)
+# decoderRight = pigpio_encoder.decoder(pi, 5, 6, callbackRightWheel)
 
 
 #encoderTest()

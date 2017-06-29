@@ -16,13 +16,14 @@ GPIO.setmode(GPIO.BCM)
 
 class Motor:
 
-    def __init__(self, pinForward, pinBackward, pinControl):
+    def __init__(self, pinForward, pinBackward, pinControl, diameter):
         """ Initialize the motor with its control pins and start pulse-width
              modulation """
 
         self.pinForward = pinForward
         self.pinBackward = pinBackward
         self.pinControl = pinControl
+        self.diameter = diameter
         GPIO.setup(self.pinForward, GPIO.OUT)
         GPIO.setup(self.pinBackward, GPIO.OUT)
         GPIO.setup(self.pinControl, GPIO.OUT)
@@ -138,11 +139,11 @@ def test():
 # motor1 = sn75 right side
 # motor2 = sn75 left side
 
-# motor1 = Motor(16, 22, 18) # Board pins
-motor1 = Motor(23, 25, 24) # BCM
-print "DC motor 1 online"
-# motor2 = Motor(23, 19, 21) # Board pins
-motor2 = Motor(11, 10, 9) # BCM
-print "DC motor 2 online"
+# # motor1 = Motor(16, 22, 18) # Board pins
+# motor1 = Motor(23, 25, 24) # BCM
+# print "DC motor 1 online"
+# # motor2 = Motor(23, 19, 21) # Board pins
+# motor2 = Motor(11, 10, 9) # BCM
+# print "DC motor 2 online"
 
 

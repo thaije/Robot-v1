@@ -30,6 +30,7 @@ class sonar:
    When finished call cancel() to tidy up.
    """
    def __init__(self, pi, trigger, echo):
+      self.SOS=340.29
       self.pi = pi
       self.trig = trigger
 
@@ -49,7 +50,7 @@ class sonar:
       else:
          if self._one_tick is not None:
             ping_micros = pigpio.tickDiff(self._one_tick, tick)
-            self._distance = (ping_micros * SOS) / 2e4
+            self._distance = (ping_micros * self.SOS) / 2e4
             self._one_tick = None
 
    def trigger(self):
