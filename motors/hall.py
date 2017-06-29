@@ -34,7 +34,7 @@ def motor1Callback(channel):
     motor1Ticks += 1
 
 
-def motor2Callback(chanel):
+def motor2Callback(channel):
     global motor2Ticks
 
     motor2Ticks += 1
@@ -48,7 +48,7 @@ def main():
 	time.sleep(1)
 
 	print "Starting motors"
-	checkEncoders(3.00)
+	checkEncoders(0.88)
 	
 
 def checkEncoders(seconds):
@@ -63,7 +63,7 @@ def checkEncoders(seconds):
 	
 		print "stopping motors"	
 		dcMotorControl.stop()   
-		dcMotorControl.cleanup()
+		#dcMotorControl.cleanup()
 	
 		# check if it continues turning during breaking
 		timed = 0
@@ -112,10 +112,10 @@ def setup():
 
     # testing
     GPIO.setup(5, GPIO.IN)
-    GPIO.add_event_detect(17, GPIO.BOTH, callback=motor1Callback)
+    GPIO.add_event_detect(5, GPIO.BOTH, callback=motor1Callback)
 
     GPIO.setup(6, GPIO.IN)
-    GPIO.add_event_detect(27, GPIO.BOTH, callback=motor1Callback)
+    GPIO.add_event_detect(6, GPIO.BOTH, callback=motor1Callback)
 
     GPIO.setup(14, GPIO.IN)
     GPIO.add_event_detect(14, GPIO.BOTH, callback=motor2Callback)

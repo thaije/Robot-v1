@@ -23,7 +23,7 @@ def callback(way):
 def checkEncoders(seconds):
    
    try:  
-      dcMotorControl.move(50)
+      dcMotorControl.set_wheel_drive_rates(0, 50)
       timed = 0
       while(timed < seconds):
          time.sleep(0.1)
@@ -45,12 +45,12 @@ def checkEncoders(seconds):
 
 pi = pigpio.pi()
 
-#decoder = pigpio_encoder.decoder(pi, 14, 15, callback)
-decoder = pigpio_encoder.decoder(pi, 5, 6, callback)
+decoder = pigpio_encoder.decoder(pi, 14, 15, callback)
+#decoder = pigpio_encoder.decoder(pi, 5, 6, callback)
 
 
 print "Starting motors"
-checkEncoders(0.75)
+checkEncoders(0.88)
 
 
 time.sleep(1)
