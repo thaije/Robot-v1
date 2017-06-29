@@ -9,42 +9,42 @@ class decoder:
 
     def __init__(self, pi, gpioA, gpioB, callback):
 
-      """
-      Instantiate the class with the pi and gpios connected to
-      rotary encoder contacts A and B.  The common contact
-      should be connected to ground.  The callback is
-      called when the rotary encoder is turned.  It takes
-      one parameter which is +1 for clockwise and -1 for
-      counterclockwise.
+        """
+        Instantiate the class with the pi and gpios connected to
+        rotary encoder contacts A and B.  The common contact
+        should be connected to ground.  The callback is
+        called when the rotary encoder is turned.  It takes
+        one parameter which is +1 for clockwise and -1 for
+        counterclockwise.
 
-      EXAMPLE
+        EXAMPLE
 
-      import time
-      import pigpio
+        import time
+        import pigpio
 
-      import rotary_encoder
+        import rotary_encoder
 
-      pos = 0
+        pos = 0
 
-      def callback(way):
+        def callback(way):
 
-         global pos
+            global pos
 
-         pos += way
+            pos += way
 
-         print("pos={}".format(pos))
+            print("pos={}".format(pos))
 
-      pi = pigpio.pi()
+        pi = pigpio.pi()
 
-      decoder = rotary_encoder.decoder(pi, 7, 8, callback)
+        decoder = rotary_encoder.decoder(pi, 7, 8, callback)
 
-      time.sleep(300)
+        time.sleep(300)
 
-      decoder.cancel()
+        decoder.cancel()
 
-    pi.stop()
+        pi.stop()
 
-      """
+        """
 
         self.pi = pi
         self.gpioA = gpioA
