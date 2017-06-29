@@ -5,14 +5,15 @@
 # sudo pigpiod
 # sudo python robot.py
 
+import time
+import pigpio
 import RPi.GPIO as GPIO
-GPIO.cleanup()
+
 
 from handy_stuff.functions.functions import * 
 from motors.servos.servoWirPWM import Servo 
 from motors.wheels.sn75SoftwarePwm import Motor
 from motors.wheels.pigpio_encoder import decoder
-from motors.wheels.pigpio_encoder_functions import *
 from proximity_sensors.sonar.srte import sonar
 
 
@@ -76,13 +77,13 @@ class Robot:
 
         for index, speed in enumerate(speeds):
             # limit the speed to [-99, 99]
-            speed = functions.clamp(speed, -99, 99)
+            speed = clamp(speed, -99, 99)
 
             # set the speed of a wheel
             if speed < 0:
-                wheels[i].backward(-speed)
+                wheels[index].backward(-speed)
             elif speed > 0:
-                wheels[i].forward(speed)
+                wheels[index].forward(speed)
 
     # Transform a unicycle model to a differential drive model
     def uni_to_diff( self, v, omega ):
@@ -99,10 +100,11 @@ class Robot:
 
     def callback_encoder_leftwheel(self, way):
         self.wheels_ticks_left += way
-
+        print "update left"
 
     def callback_encoder_rightwheel(self, way):
         self.wheels_ticks_right += way
+        print "update right"
 
     # read the proximity sensors 
     def read_proximity_sensors(self):
@@ -127,13 +129,13 @@ class Robot:
     # stop servos
     def servo_cleanup(self, servos):
         for servo in servos:
-            servos.center()
+            servo.center()
 
         # wait for the servo to center
         time.sleep(1)
 
         for servo in servos:
-            servos.stop()
+            servo.stop()
 
     def decoder_cleanup(self, decoders):
         for decoder in decoders:
@@ -145,6 +147,7 @@ class Robot:
 
     # stop and cleanup all motors and code
     def cleanup(self):
+        print "Cleaning up"
         self.stop_wheels(self.wheels)
         self.servo_cleanup(self.servos)
         self.decoder_cleanup(self.decoders)
@@ -190,7 +193,7 @@ class Robot:
 # Begin normal code
 ###########################################
 
-
+print "Setting up robot class"
 Fedya = Robot()
 
 # get sonar readings
@@ -201,7 +204,11 @@ Fedya.wheels_ticks_left
 Fedya.wheels_ticks_right
 
 # set wheel speed
-#Fedya.set_wheel_drive_rates( Fedya.wheels, [v_l, v_r] )
+Fedya.set_wheel_drive_rates( Fedya.wheels, [80, 80] )
+time.sleep(2.0)
+Fedya.stop_wheels(Fedya.wheels)
+
+print "Left: %d Right: %d" % (Fedya.wheels_ticks_left, Fedya.wheels_ticks_right)
 
 # get servo positions
 Fedya.verticalServo.position 
@@ -224,4 +231,4 @@ omega = 0.1
 #v_l, v_r = Fedya.uni_to_diff( v, omega )
 #Fedya.set_wheel_drive_rates( Fedya.wheels, [v_l, v_r] )
 
-
+Fedya.cleanup()
