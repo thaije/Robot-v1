@@ -14,7 +14,6 @@ rightEncoderTicks = 0
 
 # update left wheel encoder ticks
 def callbackLeft(way):
-
    global leftEncoderTicks
 
    leftEncoderTicks += way
@@ -22,7 +21,7 @@ def callbackLeft(way):
    print("left={}".format(leftEncoderTicks))
 
 # update right wheel encoder ticks
-def callbackRight(way)
+def callbackRight(way):
    global rightEncoderTicks
 
    rightEncoderTicks += way
@@ -77,6 +76,7 @@ checkEncoders(0.88)
 
 time.sleep(1)
 
-decoder.cancel()
+decoderLeft.cancel()
+decoderRight.cancel()
 
 pi.stop()
