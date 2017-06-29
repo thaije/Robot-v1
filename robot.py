@@ -10,7 +10,12 @@ from proximity_sensors.sonar.srte import sonar
 class Robot:
 	def __init__(self):
 
+        self.estimated_pose = None
+        self.estimated_pose.scalar_update( 0, 0, 0 )
+
 		# setup wheels
+        self.wheel_radius = 45
+        self.wheel_base_length = -1
 		self.leftWheel = Motor(23, 25, 24, diameter=9.0) 
 		self.rightWheel = Motor(11, 10, 9, diameter=9.0) 
 		self.wheels = [self.leftWheel, self.rightWheel]
@@ -28,10 +33,14 @@ class Robot:
       		exit()
 		
 		# Setup wheel encoders [left, right]
+        self.wheel_encoder_ticks_per_revolution = 360
 		decoderLeft = decoder(pi, 14, 15, callback_encoder_leftwheel)
 		decoderRight = decoder(pi, 5, 6, callback_encoder_rightwheel)
 		self.decoders = [decoderLeft, decoderRight]
-		self.wheelTicks = [0, 0]
+		self.wheels_ticks_left = 0
+        self.wheels_ticks_right = 0
+        self.prev_ticks_left = 0
+        self.prev_ticks_right = 0
 
 		# setup sonars
         # [Head sonar, right sonar, left sonar]
@@ -59,13 +68,25 @@ class Robot:
 			else if speed > 0:
 				wheels[i].forward(speed)
 
+    # Transform a unicycle model to a differential drive model
+    def uni_to_diff( self, v, omega ):
+        # v = translational velocity (m/s)
+        # omega = angular velocity (rad/s)
+
+        R = self.wheel_radius
+        L = self.wheel_base_length
+
+        v_l = ( (2.0 * v) - (omega*L) ) / (2.0 * self.wheel_radius)
+        v_r = ( (2.0 * v) + (omega*L) ) / (2.0 * self.wheel_radius)
+
+        return v_l, v_r
 
 	def callback_encoder_leftwheel(self, way):
-		self.wheelTicks[0] += way
+		self.wheels_ticks_left += way
 
 
 	def callback_encoder_rightwheel(self, way):
-		self.wheelTicks[1] += way
+		self.wheels_ticks_right += way
 
     # read the proximity sensors 
     def read_proximity_sensors(self):
@@ -116,6 +137,38 @@ class Robot:
     	pi.stop()
 
 
+    # update the estimated position of the robot using it's wheel encoder readings
+    def update_odometry( self ):
+        R = self.wheel_radius
+        N = float( self.wheel_encoder_ticks_per_revolution )
+        
+        # read the wheel encoder values
+        ticks_left = self.wheels_ticks_left
+        ticks_right = self.wheels_ticks_right
+        
+        # get the difference in ticks since the last iteration
+        d_ticks_left = ticks_left - self.prev_ticks_left
+        d_ticks_right = ticks_right - self.prev_ticks_right
+        
+        # estimate the wheel movements
+        d_left_wheel = 2*pi*R*( d_ticks_left / N )
+        d_right_wheel = 2*pi*R*( d_ticks_right / N )
+        d_center = 0.5 * ( d_left_wheel + d_right_wheel )
+        
+        # calculate the new pose
+        prev_x, prev_y, prev_theta = self.estimated_pose.scalar_unpack()
+        new_x = prev_x + ( d_center * cos( prev_theta ) )
+        new_y = prev_y + ( d_center * sin( prev_theta ) )
+        new_theta = prev_theta + ( ( d_right_wheel - d_left_wheel ) / self.robot_wheel_base_length )
+        
+        # update the pose estimate with the new values
+        self.estimated_pose.scalar_update( new_x, new_y, new_theta )
+        
+        # save the current tick count for the next iteration
+        self.prev_ticks_left = ticks_left
+        self.prev_ticks_right = ticks_right
+
+
 
 ###########################################
 # Begin normal code
@@ -130,7 +183,7 @@ class Robot:
 	Fedya.wheelTicks
 
 	# set wheel speed
-	Fedya.set_wheel_drive_rates([Fedya.leftWheel, Fedya.rightWheel],[v_l, v_r])
+	Fedya.set_wheel_drive_rates( Fedya.wheels, [v_l, v_r] )
 
 	# get servo positions
 	Fedya.verticalServo.position 
@@ -145,3 +198,9 @@ class Robot:
 	# set servo position
 	Fedya.verticalServo.setPosition(dt)
     Fedya.horizontalServo.setPosition(dt)
+
+    # send commands to wheels
+    v_l, v_r = Fedya.uni_to_diff( v, omega )
+    Fedya.set_wheel_drive_rates( Fedya.wheels, [v_l, v_r] )
+
+
