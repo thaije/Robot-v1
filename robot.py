@@ -1,3 +1,11 @@
+
+
+# Description:
+# Run:
+# sudo pigpiod
+# sudo python robot.py
+
+
 from handy_stuff.functions.functions import *
 from motors.servos.servoWirPWM import Servo 
 from motors.wheels.sn75SoftwarePwm import Motor
@@ -200,6 +208,9 @@ class Robot:
     Fedya.horizontalServo.setPosition(dt)
 
     # send commands to wheels
+    v = 0.5
+    omega = 0.1
+    
     v_l, v_r = Fedya.uni_to_diff( v, omega )
     Fedya.set_wheel_drive_rates( Fedya.wheels, [v_l, v_r] )
 
