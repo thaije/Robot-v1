@@ -91,7 +91,7 @@ def uni_to_diff( self, v, omega ):
 
 
 # stop turning of wheels
-def stop_wheels(self, wheels):
+def stop_wheels(wheels):
     for wheel in wheels:
         wheel.stop()
 
@@ -109,36 +109,36 @@ def cleanup_motors(motors):
 
 def initialize_default_motors():
     print "Initializing motors with default settings"
-    left_motor = Motor(23, 25, 24, 9.0) 
-    right_motor = Motor(11, 10, 9, 9.0)
+    left_motor = Motor(23, 25, 24) 
+    right_motor = Motor(11, 10, 9)
 
     return [left_motor, right_motor]
 
 
 # test with externally initialized motors and no cleanup
 def test_wheels_external(motors):
-    try:
-        print "testing first motor"
-        motors[0].forward(100)
-        sleep(2)
-        motors[0].backward(120)
-        sleep(1)
-        motors[0].stop()
+    # try:
+    print "testing first motor"
+    motors[0].forward(100)
+    sleep(2)
+    motors[0].backward(120)
+    sleep(1)
+    motors[0].stop()
 
-        print "testing second motor"
-        motors[1].forward(100)
-        sleep(2)
-        motors[1].backward(120)
-        sleep(1)
-        motors[1].stop()
-    except:
-        print "Error during testing of motors."
-    finally:
-        stop_wheels(motors)
+    print "testing second motor"
+    motors[1].forward(100)
+    sleep(2)
+    motors[1].backward(120)
+    sleep(1)
+    motors[1].stop()
+    # except:
+    #     print "Error during testing of motors."
+    # finally:
+    stop_wheels(motors)
 
 
 # test without having to set anything up
-def test_wheel_allin():
+def test_wheels_allin():
     motors = initialize_default_motors()
     test_wheels_external(motors)
     cleanup_motors(motors)

@@ -126,8 +126,8 @@ def initialize_default_encoders(pi):
 
 def cleanup_wheel_encoders(encoders):
     print "Cleaning up wheel encoders"
-    for decoder in decoders:
-        decoder.cancel()
+    for encoder in encoders:
+        encoder.cancel()
 
 
 def callback_encoder_leftwheel(way):
@@ -153,7 +153,8 @@ def test_encoders_external(pi, encoders):
     wheels_ticks_right = 0
 
     # test / run motors
-    wheel_controller.test_wheels_allin()
+    motors = wheel_controller.initialize_default_motors()
+    wheel_controller.test_wheels_external(motors)
 
     # print encoder ticks
     print "Left wheel encoder ticks:", wheels_ticks_left

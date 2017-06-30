@@ -29,14 +29,14 @@ class Robot:
         # setup wheels
         self.wheel_radius = 4.5
         self.wheel_base_length = -1
-        self.wheels = wheelsController.initialize_default_motors()
+        self.wheels = wheels_controller.initialize_default_motors()
         self.leftWheel = self.wheels[0]
         self.rightWheel = self.wheels[1]
 
         # setup servos
         # Vertical servo, 55 is down, 120 is up
         # horizontal servo, 30 is left
-        self.servos = servoController.initialize_default_servos()
+        self.servos = servo_controller.initialize_default_servos()
         self.verticalServo = self.servos[0]
         self.horizontalServo = self.servos[1]
         
@@ -51,7 +51,7 @@ class Robot:
         
         # Setup wheel encoders [left, right]
         self.wheel_encoder_ticks_per_revolution = 360
-        self.wheel_encoders = wheel_encoder_controller.initialize_default_encoders()
+        self.wheel_encoders = wheel_encoder_controller.initialize_default_encoders(self.pi)
         self.wheels_ticks_left = 0
         self.wheels_ticks_right = 0
         self.prev_ticks_left = 0
@@ -121,9 +121,10 @@ print "Setting up robot"
 Fedya = Robot()
 
 # Execute some tests
-sonar_controller.test_sonars_external(Fedya.sonars)
+#sonar_controller.test_sonars_external(Fedya.sonars)
 
-servo_controller.test_servos_external(Fedya.servos)
+# skipped to not damage robot
+#servo_controller.test_servos_external(Fedya.servos)
 
 wheels_controller.test_wheels_external(Fedya.wheels)
 
@@ -131,7 +132,7 @@ wheels_controller.test_wheels_external(Fedya.wheels)
 Fedya.update_wheel_encoder_values()
 print "Encoder values in robot.py: %d en %d" % (Fedya.wheels_ticks_left, Fedya.wheels_ticks_right)
 
-wheels_encoder_controller.test_encoders_external(Fedya.wheel_encoders)
+wheel_encoder_controller.test_encoders_external(Fedya.pi, Fedya.wheel_encoders)
 
 Fedya.update_wheel_encoder_values()
 print "Encoder values in robot.py: %d en %d" % (Fedya.wheels_ticks_left, Fedya.wheels_ticks_right)
