@@ -121,14 +121,14 @@ def test_wheels_external(motors):
     print "testing first motor"
     motors[0].forward(100)
     sleep(2)
-    motors[0].backward(120)
+    motors[0].backward(100)
     sleep(1)
     motors[0].stop()
 
     print "testing second motor"
     motors[1].forward(100)
     sleep(2)
-    motors[1].backward(120)
+    motors[1].backward(100)
     sleep(1)
     motors[1].stop()
     # except:
