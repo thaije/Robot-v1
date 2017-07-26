@@ -1,0 +1,2 @@
+beginner_tutorials
+-DCATKIN_DEVEL_PREFIX=/home/tjalling/Desktop/Robot/ros/master_rpi/devel -DCMAKE_INSTALL_PREFIX=/home/tjalling/Desktop/Robot/ros/master_rpi/install -G Unix Makefiles
