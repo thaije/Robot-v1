@@ -1,2 +1,2 @@
-beginner_tutorials
+beginner_tutorials2
 -DCATKIN_DEVEL_PREFIX=/home/tjalling/Desktop/Robot/ros/slave_pc/devel -DCMAKE_INSTALL_PREFIX=/home/tjalling/Desktop/Robot/ros/slave_pc/install -G Unix Makefiles

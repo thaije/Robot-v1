@@ -1,0 +1,8 @@
+prefix=/home/tjalling/Desktop/Robot/ros/slave_pc/install
+
+Name: beginner_tutorials2
+Description: Description of beginner_tutorials2
+Version: 0.0.0
+Cflags: -I/home/tjalling/Desktop/Robot/ros/slave_pc/install/include
+Libs: -L/home/tjalling/Desktop/Robot/ros/slave_pc/install/lib 
+Requires: message_runtime
