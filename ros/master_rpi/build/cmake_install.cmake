@@ -118,6 +118,7 @@ IF(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
   INCLUDE("/home/tjalling/Desktop/Robot/ros/master_rpi/build/gtest/cmake_install.cmake")
   INCLUDE("/home/tjalling/Desktop/Robot/ros/master_rpi/build/beginner_tutorials/cmake_install.cmake")
+  INCLUDE("/home/tjalling/Desktop/Robot/ros/master_rpi/build/rpi_ros/cmake_install.cmake")
 
 ENDIF(NOT CMAKE_INSTALL_LOCAL_ONLY)
 

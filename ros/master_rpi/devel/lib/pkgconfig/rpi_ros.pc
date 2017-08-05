@@ -1,0 +1,8 @@
+prefix=/home/tjalling/Desktop/Robot/ros/master_rpi/devel
+
+Name: rpi_ros
+Description: Description of rpi_ros
+Version: 0.0.0
+Cflags: 
+Libs: -L/home/tjalling/Desktop/Robot/ros/master_rpi/devel/lib 
+Requires: 

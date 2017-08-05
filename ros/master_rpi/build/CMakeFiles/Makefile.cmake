@@ -15,9 +15,13 @@ SET(CMAKE_MAKEFILE_DEPENDS
   "catkin/catkin_generated/version/package.cmake"
   "catkin_generated/installspace/_setup_util.py"
   "catkin_generated/order_packages.cmake"
+  "rpi_ros/catkin_generated/ordered_paths.cmake"
+  "rpi_ros/catkin_generated/package.cmake"
   "/home/tjalling/Desktop/Robot/ros/master_rpi/src/CMakeLists.txt"
   "/home/tjalling/Desktop/Robot/ros/master_rpi/src/beginner_tutorials/CMakeLists.txt"
   "/home/tjalling/Desktop/Robot/ros/master_rpi/src/beginner_tutorials/package.xml"
+  "/home/tjalling/Desktop/Robot/ros/master_rpi/src/rpi_ros/CMakeLists.txt"
+  "/home/tjalling/Desktop/Robot/ros/master_rpi/src/rpi_ros/package.xml"
   "/opt/ros/indigo/share/catkin/cmake/../package.xml"
   "/opt/ros/indigo/share/catkin/cmake/all.cmake"
   "/opt/ros/indigo/share/catkin/cmake/assert.cmake"
@@ -147,6 +151,7 @@ SET(CMAKE_MAKEFILE_PRODUCTS
   "CMakeFiles/CMakeDirectoryInformation.cmake"
   "gtest/CMakeFiles/CMakeDirectoryInformation.cmake"
   "beginner_tutorials/CMakeFiles/CMakeDirectoryInformation.cmake"
+  "rpi_ros/CMakeFiles/CMakeDirectoryInformation.cmake"
   )
 
 # Dependency information for all targets:

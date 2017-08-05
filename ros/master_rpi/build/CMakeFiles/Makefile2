@@ -588,6 +588,21 @@ clean: beginner_tutorials/CMakeFiles/std_msgs_generate_messages_py.dir/clean
 .PHONY : clean
 
 #=============================================================================
+# Directory level rules for directory rpi_ros
+
+# Convenience name for "all" pass in the directory.
+rpi_ros/all:
+.PHONY : rpi_ros/all
+
+# Convenience name for "clean" pass in the directory.
+rpi_ros/clean:
+.PHONY : rpi_ros/clean
+
+# Convenience name for "preinstall" pass in the directory.
+rpi_ros/preinstall:
+.PHONY : rpi_ros/preinstall
+
+#=============================================================================
 # Special targets to cleanup operation of make.
 
 # Special rule to run CMake to check the build system integrity.
