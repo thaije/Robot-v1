@@ -14,3 +14,31 @@
 - Services: A client node sends a request (what is 2+1?) to a Service node, the service node sends a response(2+1=3) back to the client
 - Parameters: rosparam can be used to set, get, load, dump, delete and list parameters (e.g. intialization paramters).
 
+
+## ROS setup
+### RPI (master):
+Handling hardware:
+- speaker: play music
+- microphone: record audio / stream audio
+- sonar: publish data / set frequency
+- servo: publish data / set frequency
+- motors: publish data / set speeds
+- wheel encoders: publish data / clear
+- camera data: record video / stream video / take picture / publish pictures
+
+### Computer (slave)
+Handling processing:
+- Speech recognition
+- Speech synthesis 
+- Process camera data
+   - vslam
+   - object recogntion / tracking
+   - face recognition / tracking
+   - structure from motion? (create 3d model from camera data)
+- Slam / navigation using odometry + sonar data
+
+
+## Possible improvements
+- Add MPU for better odometry / slam
+- Add laser pointer for mosquito hunting
+- Add manuel controls with xbox controller
