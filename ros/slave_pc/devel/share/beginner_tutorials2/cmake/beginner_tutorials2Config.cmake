@@ -122,7 +122,7 @@ foreach(library ${libraries})
     set(lib_path "")
     set(lib "${library}-NOTFOUND")
     # since the path where the library is found is returned we have to iterate over the paths manually
-    foreach(path /home/tjalling/Desktop/Robot/ros/slave_pc/devel/lib;/home/tjalling/Desktop/Robot/ros/slave_pc/devel/lib;/opt/ros/indigo/lib)
+    foreach(path /home/tjalling/Desktop/Robot/ros/slave_pc/devel/lib;/home/tjalling/Desktop/Robot/ros/slave_pc/devel/lib;/opt/ros/kinetic/lib)
       find_library(lib ${library}
         PATHS ${path}
         NO_DEFAULT_PATH NO_CMAKE_FIND_ROOT_PATH)
@@ -145,7 +145,7 @@ foreach(library ${libraries})
   endif()
 endforeach()
 
-set(beginner_tutorials2_EXPORTED_TARGETS "beginner_tutorials2_generate_messages_cpp;beginner_tutorials2_generate_messages_lisp;beginner_tutorials2_generate_messages_py")
+set(beginner_tutorials2_EXPORTED_TARGETS "beginner_tutorials2_generate_messages_cpp;beginner_tutorials2_generate_messages_eus;beginner_tutorials2_generate_messages_lisp;beginner_tutorials2_generate_messages_nodejs;beginner_tutorials2_generate_messages_py")
 # create dummy targets for exported code generation targets to make life of users easier
 foreach(t ${beginner_tutorials2_EXPORTED_TARGETS})
   if(NOT TARGET ${t})
@@ -162,12 +162,12 @@ foreach(depend ${depends})
   if(${count} EQUAL 1)
     # simple dependencies must only be find_package()-ed once
     if(NOT ${beginner_tutorials2_dep}_FOUND)
-      find_package(${beginner_tutorials2_dep} REQUIRED)
+      find_package(${beginner_tutorials2_dep} REQUIRED NO_MODULE)
     endif()
   else()
     # dependencies with components must be find_package()-ed again
     list(REMOVE_AT depend_list 0)
-    find_package(${beginner_tutorials2_dep} REQUIRED ${depend_list})
+    find_package(${beginner_tutorials2_dep} REQUIRED NO_MODULE ${depend_list})
   endif()
   _list_append_unique(beginner_tutorials2_INCLUDE_DIRS ${${beginner_tutorials2_dep}_INCLUDE_DIRS})
 

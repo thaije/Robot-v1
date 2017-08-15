@@ -65,27 +65,21 @@ uint32 score
     :param buff: buffer, ``StringIO``
     """
     try:
-      buff.write(_struct_q.pack(self.num))
+      buff.write(_get_struct_q().pack(self.num))
       _x = self.first_name
       length = len(_x)
       if python3 or type(_x) == unicode:
         _x = _x.encode('utf-8')
         length = len(_x)
-      if python3:
-        buff.write(struct.pack('<I%sB'%length, length, *_x))
-      else:
-        buff.write(struct.pack('<I%ss'%length, length, _x))
+      buff.write(struct.pack('<I%ss'%length, length, _x))
       _x = self.last_name
       length = len(_x)
       if python3 or type(_x) == unicode:
         _x = _x.encode('utf-8')
         length = len(_x)
-      if python3:
-        buff.write(struct.pack('<I%sB'%length, length, *_x))
-      else:
-        buff.write(struct.pack('<I%ss'%length, length, _x))
+      buff.write(struct.pack('<I%ss'%length, length, _x))
       _x = self
-      buff.write(_struct_BI.pack(_x.age, _x.score))
+      buff.write(_get_struct_BI().pack(_x.age, _x.score))
     except struct.error as se: self._check_types(struct.error("%s: '%s' when writing '%s'" % (type(se), str(se), str(locals().get('_x', self)))))
     except TypeError as te: self._check_types(ValueError("%s: '%s' when writing '%s'" % (type(te), str(te), str(locals().get('_x', self)))))
 
@@ -98,7 +92,7 @@ uint32 score
       end = 0
       start = end
       end += 8
-      (self.num,) = _struct_q.unpack(str[start:end])
+      (self.num,) = _get_struct_q().unpack(str[start:end])
       start = end
       end += 4
       (length,) = _struct_I.unpack(str[start:end])
@@ -120,7 +114,7 @@ uint32 score
       _x = self
       start = end
       end += 5
-      (_x.age, _x.score,) = _struct_BI.unpack(str[start:end])
+      (_x.age, _x.score,) = _get_struct_BI().unpack(str[start:end])
       return self
     except struct.error as e:
       raise genpy.DeserializationError(e) #most likely buffer underfill
@@ -133,27 +127,21 @@ uint32 score
     :param numpy: numpy python module
     """
     try:
-      buff.write(_struct_q.pack(self.num))
+      buff.write(_get_struct_q().pack(self.num))
       _x = self.first_name
       length = len(_x)
       if python3 or type(_x) == unicode:
         _x = _x.encode('utf-8')
         length = len(_x)
-      if python3:
-        buff.write(struct.pack('<I%sB'%length, length, *_x))
-      else:
-        buff.write(struct.pack('<I%ss'%length, length, _x))
+      buff.write(struct.pack('<I%ss'%length, length, _x))
       _x = self.last_name
       length = len(_x)
       if python3 or type(_x) == unicode:
         _x = _x.encode('utf-8')
         length = len(_x)
-      if python3:
-        buff.write(struct.pack('<I%sB'%length, length, *_x))
-      else:
-        buff.write(struct.pack('<I%ss'%length, length, _x))
+      buff.write(struct.pack('<I%ss'%length, length, _x))
       _x = self
-      buff.write(_struct_BI.pack(_x.age, _x.score))
+      buff.write(_get_struct_BI().pack(_x.age, _x.score))
     except struct.error as se: self._check_types(struct.error("%s: '%s' when writing '%s'" % (type(se), str(se), str(locals().get('_x', self)))))
     except TypeError as te: self._check_types(ValueError("%s: '%s' when writing '%s'" % (type(te), str(te), str(locals().get('_x', self)))))
 
@@ -167,7 +155,7 @@ uint32 score
       end = 0
       start = end
       end += 8
-      (self.num,) = _struct_q.unpack(str[start:end])
+      (self.num,) = _get_struct_q().unpack(str[start:end])
       start = end
       end += 4
       (length,) = _struct_I.unpack(str[start:end])
@@ -189,11 +177,24 @@ uint32 score
       _x = self
       start = end
       end += 5
-      (_x.age, _x.score,) = _struct_BI.unpack(str[start:end])
+      (_x.age, _x.score,) = _get_struct_BI().unpack(str[start:end])
       return self
     except struct.error as e:
       raise genpy.DeserializationError(e) #most likely buffer underfill
 
 _struct_I = genpy.struct_I
-_struct_q = struct.Struct("<q")
-_struct_BI = struct.Struct("<BI")
+def _get_struct_I():
+    global _struct_I
+    return _struct_I
+_struct_q = None
+def _get_struct_q():
+    global _struct_q
+    if _struct_q is None:
+        _struct_q = struct.Struct("<q")
+    return _struct_q
+_struct_BI = None
+def _get_struct_BI():
+    global _struct_BI
+    if _struct_BI is None:
+        _struct_BI = struct.Struct("<BI")
+    return _struct_BI
