@@ -1,8 +1,0 @@
-prefix=/home/tjalling/Desktop/Robot/ros/slave_pc/install
-
-Name: beginner_tutorials
-Description: Description of beginner_tutorials
-Version: 0.0.0
-Cflags: 
-Libs: -L/home/tjalling/Desktop/Robot/ros/slave_pc/install/lib 
-Requires: 

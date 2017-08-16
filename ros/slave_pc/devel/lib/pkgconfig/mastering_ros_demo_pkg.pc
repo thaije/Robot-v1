@@ -1,8 +1,8 @@
-prefix=/home/tjalling/Desktop/Robot/ros/slave_pc/devel
+prefix=/home/sophie/Bureaublad/Robot/ros/slave_pc/devel
 
 Name: mastering_ros_demo_pkg
 Description: Description of mastering_ros_demo_pkg
 Version: 0.0.0
-Cflags: -I/home/tjalling/Desktop/Robot/ros/slave_pc/devel/include
-Libs: -L/home/tjalling/Desktop/Robot/ros/slave_pc/devel/lib 
+Cflags: -I/home/sophie/Bureaublad/Robot/ros/slave_pc/devel/include
+Libs: -L/home/sophie/Bureaublad/Robot/ros/slave_pc/devel/lib 
 Requires: 

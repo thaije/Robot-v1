@@ -9,3 +9,5 @@ ros/slave_pc/build/*
 ros/slave_pc/devel/*
 ros/master_rpi/cmake_install.cmake
 ros/slave_pc/cmake_install.cmake
+ros/slave_pc/install/*
+ros/master_rpi/install/*

@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/tjalling/Desktop/Robot/ros/slave_pc/src
+CMAKE_SOURCE_DIR = /home/sophie/Bureaublad/Robot/ros/slave_pc/src
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/tjalling/Desktop/Robot/ros/slave_pc/build
+CMAKE_BINARY_DIR = /home/sophie/Bureaublad/Robot/ros/slave_pc/build
 
 # Utility rule file for run_tests.
 
@@ -67,6 +67,6 @@ CMakeFiles/run_tests.dir/clean:
 .PHONY : CMakeFiles/run_tests.dir/clean
 
 CMakeFiles/run_tests.dir/depend:
-	cd /home/tjalling/Desktop/Robot/ros/slave_pc/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/tjalling/Desktop/Robot/ros/slave_pc/src /home/tjalling/Desktop/Robot/ros/slave_pc/src /home/tjalling/Desktop/Robot/ros/slave_pc/build /home/tjalling/Desktop/Robot/ros/slave_pc/build /home/tjalling/Desktop/Robot/ros/slave_pc/build/CMakeFiles/run_tests.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/sophie/Bureaublad/Robot/ros/slave_pc/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/sophie/Bureaublad/Robot/ros/slave_pc/src /home/sophie/Bureaublad/Robot/ros/slave_pc/src /home/sophie/Bureaublad/Robot/ros/slave_pc/build /home/sophie/Bureaublad/Robot/ros/slave_pc/build /home/sophie/Bureaublad/Robot/ros/slave_pc/build/CMakeFiles/run_tests.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/run_tests.dir/depend
 

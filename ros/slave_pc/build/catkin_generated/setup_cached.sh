@@ -7,4 +7,7 @@
 # new environment variables
 
 # modified environment variables
-export PWD="/home/tjalling/Desktop/Robot/ros/slave_pc/build"
+export CMAKE_PREFIX_PATH="/home/sophie/Bureaublad/Robot/ros/slave_pc/devel:$CMAKE_PREFIX_PATH"
+export PWD="/home/sophie/Bureaublad/Robot/ros/slave_pc/build"
+export ROSLISP_PACKAGE_DIRECTORIES="/home/sophie/Bureaublad/Robot/ros/slave_pc/devel/share/common-lisp"
+export ROS_PACKAGE_PATH="/home/sophie/Bureaublad/Robot/ros/slave_pc/src:$ROS_PACKAGE_PATH"

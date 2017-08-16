@@ -1,6 +1,6 @@
 # CMake generated Testfile for 
-# Source directory: /home/tjalling/Desktop/Robot/ros/slave_pc/src
-# Build directory: /home/tjalling/Desktop/Robot/ros/slave_pc/build
+# Source directory: /home/sophie/Bureaublad/Robot/ros/slave_pc/src
+# Build directory: /home/sophie/Bureaublad/Robot/ros/slave_pc/build
 # 
 # This file includes the relevant testing commands required for 
 # testing this directory and lists subdirectories to be tested as well.
