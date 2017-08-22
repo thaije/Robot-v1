@@ -1,4 +1,4 @@
-opencv/data/*
+vision/opencv/data/*
 lsd_slam/room/*
 speech-synthesis/mimic/mimic-development/*
 speech-recognition/sphinx/sphinxbase-5prealpha/*
