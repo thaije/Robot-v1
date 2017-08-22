@@ -12,3 +12,7 @@
 
 #### set voice speed: 
 ```espeak -s 175```
+
+### Nice voice
+```espeak -v en-scottish "Hello mister X, h
+ow are you doing?"```

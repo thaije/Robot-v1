@@ -1,3 +1,8 @@
+This folder contains the beginning of a migration to ROS (and some ROS tutorials I did), with ROS on the RPI as master and a laptop with ROS as slave for image processing and other computationally expensive tasks.
+As of now I have decided to continue with ROS with my next project with a better robot such as a turtlebot.
+
+
+
 # Ros
 - slave\_pc and master\_rpi each contain a catkin workspace.
 
