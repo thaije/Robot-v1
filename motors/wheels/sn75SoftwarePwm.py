@@ -10,7 +10,7 @@
 
 import RPi.GPIO as GPIO
 from time import sleep
-#from handy_stuff.functions.functions import * 
+#from handy_stuff.functions.functions import *
 
 
 GPIO.setmode(GPIO.BCM)
@@ -109,7 +109,7 @@ def cleanup_motors(motors):
 
 def initialize_default_motors():
     print "Initializing motors with default settings"
-    left_motor = Motor(23, 25, 24) 
+    left_motor = Motor(23, 25, 24)
     right_motor = Motor(11, 10, 9)
 
     return [left_motor, right_motor]
@@ -119,16 +119,16 @@ def initialize_default_motors():
 def test_wheels_external(motors):
     # try:
     print "testing first motor"
-    motors[0].forward(100)
+    motors[0].forward(50)
     sleep(2)
-    motors[0].backward(100)
+    motors[0].backward(50)
     sleep(1)
     motors[0].stop()
 
     print "testing second motor"
-    motors[1].forward(100)
+    motors[1].forward(50)
     sleep(2)
-    motors[1].backward(100)
+    motors[1].backward(50)
     sleep(1)
     motors[1].stop()
     # except:
@@ -142,9 +142,3 @@ def test_wheels_allin():
     motors = initialize_default_motors()
     test_wheels_external(motors)
     cleanup_motors(motors)
-
-
-
-
-
-
