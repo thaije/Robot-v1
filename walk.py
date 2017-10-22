@@ -3,7 +3,7 @@ import sys
 import random
 
 print "Initializing motors"
-import 
+import
 
 import motors.sn75SoftwarePwm as dcMotorControl
 from motors.servoWirPWM import *
@@ -51,8 +51,8 @@ def loop():
 		    print " %s less than 15cm, turning %s" % (distance,  direction)
 		else:
 		    print "Still turning"
-            	
-		
+
+
                 # turn for 1 second and restart the loop
                 dcMotorControl.turn(direction, 100)
                 sleep(0.6)
@@ -60,7 +60,7 @@ def loop():
                 continue
 
             # go straight
-            else: 
+            else:
 		print "Going straight"
                 prevTurn = False
                 dcMotorControl.move(100)
@@ -79,7 +79,7 @@ def loop():
         dcMotorControl.cleanup()
         servoCleanup()
 
-def test(): 
+def test():
     try:
 
 	#dcMotorControl.move(100)
@@ -106,12 +106,5 @@ def main():
     loop()
 #    test()
 
-
 if __name__ == "__main__":
     main()
-
-
-
-
-
-

@@ -86,7 +86,7 @@ def initialize_default_sonars(pi):
     return sonars
 
 
-# read the proximity sensors 
+# read the proximity sensors
 def read_proximity_sensors(sonars):
     print "Read sonars"
 
@@ -98,7 +98,7 @@ def read_proximity_sensors(sonars):
 
     # read the sonar results
     proximity = []
-    for sonar in sonars: 
+    for sonar in sonars:
         proximity.append(sonar.read())
 
     return proximity
