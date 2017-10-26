@@ -34,6 +34,14 @@ Raspberry pi robot using
 - ssh pi@ip_rpi (try from list)
 - sshfs pi@ip_rpi:/home/pi /home/tjalling/Desktop/rpi
 
+In the case where the rpi freezes: 
+- On your laptop/pc do: `ps -ef`
+- Search for the ssh thread: e.g.: 
+`tjalling 11083     1  0 17:37 pts/0    00:00:10 ssh -x -a -oClearAllForwardings=yes -2 pi@ip_adress -s sftp`
+- kill 11083
+
+This should stop the mount and other stuff from freezing
+
 
 
 #Todo
