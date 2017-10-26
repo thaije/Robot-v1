@@ -95,7 +95,7 @@ def read_sensors():
 def main():
     try:
         init()
-        #loop()
+        loop()
         #sonar.test_sonars_allin()
     except KeyboardInterrupt:
         print "User cancelled"
